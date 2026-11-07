@@ -28,7 +28,9 @@ size = Vector3(1, 0.2, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_77876"]
 size = Vector2(1, 1)
 
-[node name="Street" type="Node3D" unique_id=1049801148]
+[node name="Street" type="SubViewport" unique_id=1887992785]
+own_world_3d = true
+size = Vector2i(320, 240)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=589042920]
 environment = SubResource("Environment_eaort")

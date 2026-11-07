@@ -1,22 +1,32 @@
 [gd_scene format=3 uid="uid://cblvnxb4o7q8r"]
 
+[ext_resource type="Script" uid="uid://hgxs8st45loy" path="res://office/salle_surveillance.gd" id="1_s03c4"]
 [ext_resource type="Script" uid="uid://cnxwe5r6tahp5" path="res://office/vue_joueur.gd" id="1_yy8ch"]
+[ext_resource type="PackedScene" uid="uid://b03y66qsgtbv6" path="res://screen/screen.tscn" id="2_3hqai"]
+[ext_resource type="PackedScene" uid="uid://wq1u4e0gv8uc" path="res://street/street.tscn" id="2_5j1s6"]
+[ext_resource type="PackedScene" uid="uid://cv7weysihmh6d" path="res://office/Desk by Quaternius - V86Go2rlnq.glb" id="3_i6g08"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_25aah"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3b1fi"]
 
-[node name="Salle_Surveillance" type="Node3D" unique_id=904370933]
+[node name="Salle_Surveillance" type="Node3D" unique_id=904370933 node_paths=PackedStringArray("ecrans")]
+script = ExtResource("1_s03c4")
+ecrans = [NodePath("Screen1"), NodePath("Screen2"), NodePath("Screen3"), NodePath("Screen4"), NodePath("Screen5"), NodePath("Screen6")]
+rues = Array[PackedScene]([ExtResource("2_5j1s6"), ExtResource("2_5j1s6"), ExtResource("2_5j1s6"), ExtResource("2_5j1s6"), ExtResource("2_5j1s6"), ExtResource("2_5j1s6")])
 
 [node name="Lumiere_Plafond" type="SpotLight3D" parent="." unique_id=1880976669]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1, 0)
 
 [node name="Vue_Joueur" type="Camera3D" parent="." unique_id=1615467431]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.205)
 script = ExtResource("1_yy8ch")
 
+[node name="RayCast3D" type="RayCast3D" parent="Vue_Joueur" unique_id=1007433458]
+transform = Transform3D(1, 0, 0, 0, -1.3113416e-07, -1, 0, 3, -4.371139e-08, 0, 0, 0)
+
 [node name="Sol" type="Node3D" parent="." unique_id=1660880146]
-transform = Transform3D(3, 0, 0, 0, 0.2, 0, 0, 0, 3, 0, 0, -1)
+transform = Transform3D(3.5, 0, 0, 0, 0.233, 0, 0, 0, 3.5, 0, 0, -1)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Sol" unique_id=722672682]
 
@@ -25,3 +35,48 @@ mesh = SubResource("BoxMesh_25aah")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sol/StaticBody3D" unique_id=136585625]
 shape = SubResource("BoxShape3D_3b1fi")
+
+[node name="Mur_Gauche" type="Node3D" parent="." unique_id=200968806]
+transform = Transform3D(-1.5298986e-07, -0.23299998, 0, 3.4999998, -1.0184753e-08, 0, 0, 0, 3.4999998, -1.629162, 1.6431533, -1)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Mur_Gauche" unique_id=607861866]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mur_Gauche/StaticBody3D" unique_id=792942215]
+transform = Transform3D(1.0000001, -2.220446e-16, 0, -5.684342e-14, 1, 0, 0, 0, 1.0000001, -0.0029835105, 0, 0)
+mesh = SubResource("BoxMesh_25aah")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mur_Gauche/StaticBody3D" unique_id=183340551]
+shape = SubResource("BoxShape3D_3b1fi")
+
+[node name="Mur_Droit" type="Node3D" parent="." unique_id=111425063]
+transform = Transform3D(-1.5298986e-07, -0.23299998, 0, 3.4999998, -1.0184753e-08, 0, 0, 0, 3.4999998, 1.6361703, 1.6431533, -1)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Mur_Droit" unique_id=770492229]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mur_Droit/StaticBody3D" unique_id=92117184]
+transform = Transform3D(1.0000001, -2.220446e-16, 0, -5.684342e-14, 1, 0, 0, 0, 1.0000001, -0.003134042, 0, 0)
+mesh = SubResource("BoxMesh_25aah")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mur_Droit/StaticBody3D" unique_id=362606474]
+shape = SubResource("BoxShape3D_3b1fi")
+
+[node name="Screen1" parent="." unique_id=697487490 instance=ExtResource("2_3hqai")]
+transform = Transform3D(0.21498255, 0, 0.12760296, 0, 0.25, 0, -0.12760296, 0, 0.21498255, -0.6813643, 1.4063588, -1.520599)
+
+[node name="Screen2" parent="." unique_id=524203711 instance=ExtResource("2_3hqai")]
+transform = Transform3D(0.1999198, 0, 0.15010689, 0, 0.25, 0, -0.15010689, 0, 0.1999198, -0.7079749, 1.9657613, -1.5534664)
+
+[node name="Screen3" parent="." unique_id=1938662658 instance=ExtResource("2_3hqai")]
+transform = Transform3D(0.24999999, 0, 0, 0, 0.25, 0, 0, 0, 0.24999999, 0.05891776, 1.4340947, -1.7695789)
+
+[node name="Screen4" parent="." unique_id=442935597 instance=ExtResource("2_3hqai")]
+transform = Transform3D(0.24963757, 0, 0.013456074, 0, 0.25, 0, -0.013456074, 0, 0.24963757, 0.05891776, 1.9902816, -1.8207668)
+
+[node name="Screen5" parent="." unique_id=693746171 instance=ExtResource("2_3hqai")]
+transform = Transform3D(0.22331443, 0, -0.11238627, 0, 0.25, 0, 0.11238627, 0, 0.22331443, 0.7815622, 1.4340947, -1.6030569)
+
+[node name="Screen6" parent="." unique_id=1243956428 instance=ExtResource("2_3hqai")]
+transform = Transform3D(0.21310996, 0, -0.13070638, 0, 0.25, 0, 0.13070638, 0, 0.21310996, 0.79740536, 1.9902816, -1.6297735)
+
+[node name="Desk" parent="." unique_id=2084638257 instance=ExtResource("3_i6g08")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, -1.5)

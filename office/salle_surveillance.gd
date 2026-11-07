@@ -15,9 +15,12 @@ func _ready() -> void:
 		var mat = StandardMaterial3D.new()
 		mat.albedo_texture = rue.get_texture()
 		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-		ecrans[i].window.mesh.material = mat
+		ecrans[i].window.material_override = mat
+		
+		ecrans[i].rue = rue
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_just_pressed("pause"):
+		get_tree().quit()

@@ -21,8 +21,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion :
 		if not is_camera_selected:
 			rotate_camera(event.relative)
-		else :
-			pass #TODO
+		elif current_screen.rue.has_node("Camera"):
+			current_screen.rue.get_node("Camera").rotate_camera(event.relative)
 
 func rotate_camera(mouse_delta: Vector2) -> void:
 	rotation.y -= mouse_delta.x * mouse_sensitivity

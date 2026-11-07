@@ -5,6 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://b03y66qsgtbv6" path="res://screen/screen.tscn" id="2_3hqai"]
 [ext_resource type="PackedScene" uid="uid://wq1u4e0gv8uc" path="res://street/street.tscn" id="2_5j1s6"]
 [ext_resource type="PackedScene" uid="uid://cv7weysihmh6d" path="res://office/Desk by Quaternius - V86Go2rlnq.glb" id="3_i6g08"]
+[ext_resource type="PackedScene" uid="uid://cdtjlw06suixb" path="res://office/Computer mouse by Poly by Google - 6ikB7PIRVyd.glb" id="4_tcoip"]
+[ext_resource type="PackedScene" uid="uid://cfdvbof3s3jaf" path="res://office/Keyboard by Poly by Google - 1U29qLrhNs3.glb" id="7_y31d6"]
+[ext_resource type="PackedScene" uid="uid://w0ix0gv1f7ac" path="res://office/Chair by Poly by Google - 49lEx3gLfn9.glb" id="8_vqm4e"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_25aah"]
 
@@ -16,7 +19,10 @@ ecrans = [NodePath("Screen1"), NodePath("Screen2"), NodePath("Screen3"), NodePat
 rues = Array[PackedScene]([ExtResource("2_5j1s6"), ExtResource("2_5j1s6"), ExtResource("2_5j1s6"), ExtResource("2_5j1s6"), ExtResource("2_5j1s6"), ExtResource("2_5j1s6")])
 
 [node name="Lumiere_Plafond" type="SpotLight3D" parent="." unique_id=1880976669]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.7739465, -0.42586845)
+light_color = Color(1, 1, 0.22745098, 1)
+light_cull_mask = 4294967293
+shadow_enabled = true
 
 [node name="Vue_Joueur" type="Camera3D" parent="." unique_id=1615467431]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.205)
@@ -32,6 +38,9 @@ transform = Transform3D(3.5, 0, 0, 0, 0.233, 0, 0, 0, 3.5, 0, 0, -1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Sol/StaticBody3D" unique_id=1098985281]
 mesh = SubResource("BoxMesh_25aah")
+
+[node name="Computer mouse by Poly by Google - 6ikB7PIRVyd" parent="Sol/StaticBody3D/MeshInstance3D" unique_id=641931288 instance=ExtResource("4_tcoip")]
+transform = Transform3D(-0.007978888, 0, 0.0005808134, 0, 0.1, 0, -0.0005808134, 0, -0.007978888, 0.13449813, 4.731927, -0.046572775)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sol/StaticBody3D" unique_id=136585625]
 shape = SubResource("BoxShape3D_3b1fi")
@@ -60,8 +69,40 @@ mesh = SubResource("BoxMesh_25aah")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Mur_Droit/StaticBody3D" unique_id=362606474]
 shape = SubResource("BoxShape3D_3b1fi")
 
+[node name="Mur_Devant" type="Node3D" parent="." unique_id=255280471]
+transform = Transform3D(6.6873997e-15, 1.0184753e-08, 3.4999998, 3.5000002, -1.0184753e-08, 0, 1.5298987e-07, 0.23299998, -1.5298986e-07, 0.010403395, 1.6431533, -2.7147913)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Mur_Devant" unique_id=410850582]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mur_Devant/StaticBody3D" unique_id=887077857]
+transform = Transform3D(1.0000001, -2.220446e-16, 0, -5.684342e-14, 1, 0, 0, 0, 1.0000001, -0.003134042, 0, 0)
+mesh = SubResource("BoxMesh_25aah")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mur_Devant/StaticBody3D" unique_id=1957425995]
+shape = SubResource("BoxShape3D_3b1fi")
+
+[node name="Mur_Derriere" type="Node3D" parent="." unique_id=370166768]
+transform = Transform3D(6.6873997e-15, 1.0184753e-08, 3.4999998, 3.5000002, -1.0184753e-08, 0, 1.5298987e-07, 0.23299998, -1.5298986e-07, 0.010403395, 1.6431533, 0.6504009)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Mur_Derriere" unique_id=1117522396]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mur_Derriere/StaticBody3D" unique_id=531222276]
+transform = Transform3D(1.0000001, -2.220446e-16, 0, -5.684342e-14, 1, 0, 0, 0, 1.0000001, -0.003134042, 0, 0)
+mesh = SubResource("BoxMesh_25aah")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mur_Derriere/StaticBody3D" unique_id=504705261]
+shape = SubResource("BoxShape3D_3b1fi")
+
 [node name="Screen1" parent="." unique_id=697487490 instance=ExtResource("2_3hqai")]
 transform = Transform3D(0.21498255, 0, 0.12760296, 0, 0.25, 0, -0.12760296, 0, 0.21498255, -0.6813643, 1.4063588, -1.520599)
+collision_mask = 2
+
+[node name="LightScreen1" type="SpotLight3D" parent="." unique_id=2039354298]
+transform = Transform3D(-0.85628, 0.047486342, -0.5143243, 0.04070753, 0.99887186, 0.024450965, 0.5149052, 0, -0.8572471, -0.5725615, 1.3836224, -1.2747681)
+layers = 2
+light_energy = 0.525
+spot_range = 1.339
+spot_angle = 102.03
 
 [node name="Screen2" parent="." unique_id=524203711 instance=ExtResource("2_3hqai")]
 transform = Transform3D(0.1999198, 0, 0.15010689, 0, 0.25, 0, -0.15010689, 0, 0.1999198, -0.7079749, 1.9657613, -1.5534664)
@@ -80,3 +121,9 @@ transform = Transform3D(0.21310996, 0, -0.13070638, 0, 0.25, 0, 0.13070638, 0, 0
 
 [node name="Desk" parent="." unique_id=2084638257 instance=ExtResource("3_i6g08")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, -1.5)
+
+[node name="Keyboard" parent="." unique_id=1977884095 instance=ExtResource("7_y31d6")]
+transform = Transform3D(0.002, 0, 0, 0, 0.002, 0, 0, 0, 0.002, 0.08614442, 1.3211389, -1.1757762)
+
+[node name="Chair" parent="." unique_id=1579308504 instance=ExtResource("8_vqm4e")]
+transform = Transform3D(-6.5567085e-09, 0, 0.15, 0, 0.15, 0, -0.15, 0, -6.5567085e-09, 0.013176858, 0.1227541, -0.16170573)

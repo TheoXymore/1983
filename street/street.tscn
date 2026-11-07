@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://wq1u4e0gv8uc"]
+
+[ext_resource type="Script" uid="uid://g1ai04fotg2n" path="res://street/camera.gd" id="1_vpklk"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vpklk"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.25686157, 0.23350336, 0.17160405, 1)
+sky_curve = 0.15128455
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_xc2c6"]
+sky_material = SubResource("ProceduralSkyMaterial_vpklk")
+
+[sub_resource type="Environment" id="Environment_eaort"]
+background_mode = 2
+sky = SubResource("Sky_xc2c6")
+reflected_light_source = 2
+glow_enabled = true
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 1.0
+fog_depth_curve = 0.25135878
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4gein"]
+size = Vector3(1, 0.2, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_77876"]
+size = Vector2(1, 1)
+
+[node name="Street" type="Node3D" unique_id=1049801148]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=589042920]
+environment = SubResource("Environment_eaort")
+
+[node name="Camera" type="Camera3D" parent="." unique_id=1454714244]
+transform = Transform3D(0.8660254, -0.17101009, 0.4698463, 0, 0.9396926, 0.34202018, -0.5, -0.29619816, 0.81379765, -2.3841858e-07, 0, -9.536743e-07)
+current = true
+fov = 60.0
+far = 200.0
+script = ExtResource("1_vpklk")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera" unique_id=2098189554]
+light_color = Color(0.5418828, 0, 0, 1)
+light_energy = 0.464
+light_bake_mode = 1
+
+[node name="TempMesh" type="Node3D" parent="." unique_id=1672108172]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, -5, -24.5)
+
+[node name="Floor" type="Node3D" parent="TempMesh" unique_id=373741704]
+transform = Transform3D(18, 0, 0, 0, 1, 0, 0, 0, 200, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="TempMesh/Floor" unique_id=179838468]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TempMesh/Floor/StaticBody3D" unique_id=1151231913]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+shape = SubResource("BoxShape3D_4gein")
+debug_color = Color(0, 0.56969917, 0.66320294, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TempMesh/Floor/StaticBody3D" unique_id=153564968]
+mesh = SubResource("PlaneMesh_77876")
+
+[node name="Wall1" type="Node3D" parent="TempMesh" unique_id=11013186]
+transform = Transform3D(-7.86805e-07, -1, 0, 18, -4.371139e-08, 0, 0, 0, 200, 9, 9, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="TempMesh/Wall1" unique_id=737101401]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TempMesh/Wall1/StaticBody3D" unique_id=990951543]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+shape = SubResource("BoxShape3D_4gein")
+debug_color = Color(0, 0.56969917, 0.66320294, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TempMesh/Wall1/StaticBody3D" unique_id=1439484880]
+mesh = SubResource("PlaneMesh_77876")
+
+[node name="Wall2" type="Node3D" parent="TempMesh" unique_id=60741255]
+transform = Transform3D(-7.86805e-07, 1, 0, -18, -4.371139e-08, 0, 0, 0, 200, -9, 9, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="TempMesh/Wall2" unique_id=1037705430]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TempMesh/Wall2/StaticBody3D" unique_id=746838068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+shape = SubResource("BoxShape3D_4gein")
+debug_color = Color(0, 0.56969917, 0.66320294, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TempMesh/Wall2/StaticBody3D" unique_id=338368775]
+mesh = SubResource("PlaneMesh_77876")

@@ -37,7 +37,9 @@ size = Vector2(24, 2)
 albedo_color = Color(0.07926186, 0.07926186, 0.07926185, 1)
 metallic = 0.5
 
-[node name="Street1" type="Node3D" unique_id=595919954]
+[node name="Street1" type="SubViewport" unique_id=595919954]
+own_world_3d = true
+size = Vector2i(320, 240)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1166704660]
 environment = SubResource("Environment_8pg2w")

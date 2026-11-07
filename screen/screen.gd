@@ -1,6 +1,7 @@
 extends StaticBody3D
 class_name Screen
 
+@onready var anchor: Node3D = $Anchor
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

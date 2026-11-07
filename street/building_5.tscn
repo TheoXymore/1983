@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bgwyqyr741lm2"]
+
+[ext_resource type="PackedScene" uid="uid://cjlcep4bv25s5" path="res://assets/Building5 by Kay Lousberg - g15lpKh4li.glb" id="1_rpqjp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ex6v"]
+size = Vector3(1.3706076, 1.6299438, 1.2950134)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c8sda"]
+size = Vector3(1.9976892, 0.1020813, 1.9961166)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pxff7"]
+size = Vector3(0.3953939, 0.1020813, 0.15201092)
+
+[node name="Building5" unique_id=1018070901 instance=ExtResource("1_rpqjp")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1" unique_id=993060164]
+
+[node name="GreenBuilding" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=466123744]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08050978, 0.8170471, -0.0048980713)
+shape = SubResource("BoxShape3D_3ex6v")
+
+[node name="Floor" type="CollisionShape3D" parent="StaticBody3D" index="1" unique_id=1291278661]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0010676384, 0.053115845, 0.0019264221)
+shape = SubResource("BoxShape3D_c8sda")
+
+[node name="Bench" type="CollisionShape3D" parent="StaticBody3D" index="2" unique_id=1155801448]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.6878734, 0.14899614, 0.39110413)
+shape = SubResource("BoxShape3D_pxff7")

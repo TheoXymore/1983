@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://to6a4cxl4pbb"]
+
+[ext_resource type="PackedScene" uid="uid://cief6bod3jhmn" path="res://assets/Streetlight by Kay Lousberg - vPFSLYh6sg.glb" id="1_onifg"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_llw3r"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.15927735
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_77876"]
+metallic = 1.0
+metallic_specular = 1.0
+roughness = 0.0
+emission_enabled = true
+emission = Color(1, 0.8862745, 0, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_23u71"]
+height = 0.7772217
+radius = 0.03173828
+
+[node name="Streetlight" unique_id=1196694688 instance=ExtResource("1_onifg")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="1" unique_id=1238145211]
+transform = Transform3D(0.9474168, -1.39877425e-08, 0.32000226, -0.32000226, -4.1412903e-08, 0.9474168, 0, -1, -4.371139e-08, -0.20449069, 0.8749967, 0)
+light_color = Color(1, 0.8862745, 0, 1)
+light_energy = 16.0
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2" unique_id=1263771735]
+transform = Transform3D(-2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 0, 0, 0, 0.5, -0.1857598, 0.91094506, 0)
+mesh = SubResource("CylinderMesh_llw3r")
+surface_material_override/0 = SubResource("StandardMaterial3D_77876")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="3" unique_id=1299620497]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=1769642462]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38494873, 0)
+shape = SubResource("CylinderShape3D_23u71")

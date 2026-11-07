@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cblvnxb4o7q8r"]
+
+[ext_resource type="Script" uid="uid://cnxwe5r6tahp5" path="res://office/vue_joueur.gd" id="1_yy8ch"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_25aah"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3b1fi"]
+
+[node name="Salle_Surveillance" type="Node3D" unique_id=904370933]
+
+[node name="Lumiere_Plafond" type="SpotLight3D" parent="." unique_id=1880976669]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1, 0)
+
+[node name="Vue_Joueur" type="Camera3D" parent="." unique_id=1615467431]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_yy8ch")
+
+[node name="Sol" type="Node3D" parent="." unique_id=1660880146]
+transform = Transform3D(3, 0, 0, 0, 0.2, 0, 0, 0, 3, 0, 0, -1)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Sol" unique_id=722672682]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Sol/StaticBody3D" unique_id=1098985281]
+mesh = SubResource("BoxMesh_25aah")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sol/StaticBody3D" unique_id=136585625]
+shape = SubResource("BoxShape3D_3b1fi")

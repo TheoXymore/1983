@@ -1,6 +1,8 @@
 extends StaticBody3D
 class_name Phone
 
+@export var dialogue_box: DialogueBox
+
 var is_ringing = false
 var current_call
 @export var delay_before_next_ring = 5
@@ -23,10 +25,11 @@ func try_to_answer():
 
 func on_phone_call_started(call_data):
 	current_call = call_data
-	print(call_data["caller"], " : ", call_data["text"])
-	if not StoryManager.has_remaining_calls_today():
+	await dialogue_box.show_dialogue(call_data["caller"], call_data["text"])
+	if StoryManager.has_remaining_calls_today():
+		finish_current_call()
+	else :
 		StoryManager.end_current_day()
-	finish_current_call()
 	
 func finish_current_call():
 	await get_tree().create_timer(delay_before_next_ring).timeout

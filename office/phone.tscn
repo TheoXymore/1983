@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://d20cmvdr4im5q"]
+
+[ext_resource type="Script" uid="uid://dnsdn2tke00mn" path="res://office/phone.gd" id="1_ra8yq"]
+[ext_resource type="PackedScene" uid="uid://debnjvx8rwcwe" path="res://office/Office Phone by dook - YxfMuchpUF.glb" id="2_urlwp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3b1fi"]
+size = Vector3(4.26828, 3.2314758, 1.8754883)
+
+[node name="Phone" type="StaticBody3D" unique_id=629982819]
+script = ExtResource("1_ra8yq")
+metadata/_custom_type_script = "uid://dnsdn2tke00mn"
+
+[node name="Modele" parent="." unique_id=1698900412 instance=ExtResource("2_urlwp")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=97156840]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5112152, 0.15879822, -0.4918369)
+shape = SubResource("BoxShape3D_3b1fi")

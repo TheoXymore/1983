@@ -10,7 +10,7 @@ var current_pitch = 0.0
 var rues: Array
 
 var collided_object
-var current_screen
+var current_object
 
 @onready var tween = get_tree().create_tween()
 
@@ -21,8 +21,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion :
 		if not is_camera_selected:
 			rotate_camera(event.relative)
-		elif current_screen.rue.has_node("Camera"):
-			current_screen.rue.get_node("Camera").rotate_camera(event.relative)
+		elif current_object.rue.has_node("Camera"):
+			current_object.rue.get_node("Camera").rotate_camera(event.relative)
 
 func rotate_camera(mouse_delta: Vector2) -> void:
 	rotation.y -= mouse_delta.x * mouse_sensitivity
@@ -39,9 +39,14 @@ func select_screen_under_crosshair():
 	collided_object = ray_cast_3d.get_collider()
 	
 	if collided_object is Screen:
-		current_screen = collided_object
-		print(current_screen)
-		move_camera_to_global_position(current_screen.anchor.global_position, current_screen.anchor.global_rotation, false)
+		current_object = collided_object
+		print(current_object)
+		move_camera_to_global_position(current_object.anchor.global_position, current_object.anchor.global_rotation, false)
+		
+	elif collided_object is Phone:
+		current_object = collided_object
+		print(current_object)
+		current_object.try_to_answer()
 
 func move_camera_to_global_position(position, rotation, can_move):
 	if tween and tween.is_valid():

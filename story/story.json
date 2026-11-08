@@ -1,0 +1,14 @@
+{
+	"1" : {
+		"calls" : [{
+			"id" : "day1_call1",
+			"caller" : "Inconnu",
+			"text" : "Bonjour, vous avez été embauché pour surveiller la population."
+		},
+		{
+			"id": "day1_call2",
+			"caller": "Inconnu",
+			"text" : "Bon travail aujourd'hui, vous pouvez aller vous reposer"
+		}]
+	}
+}

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://g1ai04fotg2n" path="res://street/camera.gd" id="1_vpklk"]
 [ext_resource type="Script" uid="uid://2cinaildy0ic" path="res://street/rue.gd" id="1_wsokd"]
+[ext_resource type="Script" uid="uid://bwl56pkkl5gtb" path="res://IA/SpawnPassant.gd" id="2_3gvki"]
 [ext_resource type="PackedScene" uid="uid://d1pyvsoumkn13" path="res://IA/passant_plotter.tscn" id="2_47aay"]
 [ext_resource type="PackedScene" uid="uid://b0166o0m1eyex" path="res://street/building_1.tscn" id="2_eaort"]
 [ext_resource type="PackedScene" uid="uid://ddyc4mtc8i046" path="res://street/building_2.tscn" id="3_n78di"]
@@ -12,6 +13,12 @@
 [ext_resource type="PackedScene" uid="uid://bhnwtfbx5eupn" path="res://IA/zone_spawn.tscn" id="10_knc7f"]
 [ext_resource type="PackedScene" uid="uid://0tbhudja2hjc" path="res://IA/zone_checkpoint.tscn" id="11_3gvki"]
 [ext_resource type="PackedScene" uid="uid://by87pybqpltom" path="res://IA/zone_rassemblement.tscn" id="12_knc7f"]
+
+[sub_resource type="Resource" id="Resource_knc7f"]
+script = ExtResource("2_3gvki")
+scene = ExtResource("2_47aay")
+poids = 1.0
+metadata/_custom_type_script = "uid://bwl56pkkl5gtb"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_23u71"]
 size = Vector3(28, 0.054, 2.5)
@@ -56,7 +63,7 @@ radius = 0.2
 
 [node name="Street" type="Node3D" unique_id=1500921649 node_paths=PackedStringArray("spawn", "checkpoints", "rassemblements")]
 script = ExtResource("1_wsokd")
-scenes_passants = Array[PackedScene]([ExtResource("2_47aay")])
+scenes_passants = Array[ExtResource("2_3gvki")]([SubResource("Resource_knc7f")])
 spawn = NodePath("Terrain/SpawnZone")
 checkpoints = [NodePath("Terrain/ZoneCheckpoint")]
 rassemblements = [NodePath("Terrain/ZoneRassemblement")]
@@ -375,13 +382,15 @@ mesh = SubResource("QuadMesh_wsokd")
 surface_material_override/0 = SubResource("StandardMaterial3D_4gein")
 
 [node name="SpawnZone" parent="Terrain" unique_id=199372426 instance=ExtResource("10_knc7f")]
-transform = Transform3D(-8.349943e-08, 0, -0.25, 0, 0.25, 0, 1.9102443, 0, -1.0927847e-08, 12.30647, 0.18032706, 2.0131478)
+transform = Transform3D(-7.86805e-08, 0, -0.25, 0, 0.01, 0, 1.8, 0, -1.0927847e-08, 13.875216, 0.1, 2.013)
 
 [node name="ZoneCheckpoint" parent="Terrain" unique_id=1605115178 instance=ExtResource("11_3gvki")]
-transform = Transform3D(-9.0985445e-08, 0, -0.25, 0, 0.25, 0, 2.0815043, 0, -1.0927847e-08, -0.91987675, 0.17416406, 1.9457309)
+transform = Transform3D(-7.86805e-08, 0, -0.25, 0, 0.01, 0, 1.8, 0, -1.0927847e-08, -0.92, 0.1, 2)
 
-[node name="ZoneRassemblement" parent="Terrain" unique_id=1647640770 instance=ExtResource("12_knc7f")]
-transform = Transform3D(-2.6432494e-08, 0, -0.604705, 0, 0.2436397, 0, 0.604705, 0, -2.6432494e-08, 1.9909799, 0.1742355, 1.2980424)
+[node name="ZoneRassemblement" parent="Terrain" unique_id=1647640770 node_paths=PackedStringArray("checkpoint_precedent") instance=ExtResource("12_knc7f")]
+transform = Transform3D(-2.644539e-08, 0, -0.605, 0, 0.01, 0, 0.605, 0, -2.644539e-08, 1.991, 0.1, 1.298)
+checkpoint_precedent = NodePath("../SpawnZone")
+probabilite = 0.25
 
 [node name="CamViewports" type="Node" parent="." unique_id=1211229553]
 

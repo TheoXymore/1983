@@ -8,7 +8,7 @@ var camViewports: Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var rue_node: Node3D = rue.instantiate()
+	var rue_node: Rue = rue.instantiate()
 	add_child(rue_node)
 	rue_node.position.y = world_height;
 	camViewports = rue_node.get_child(1)

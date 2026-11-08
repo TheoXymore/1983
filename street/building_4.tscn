@@ -11,6 +11,16 @@ size = Vector3(1.9976892, 0.1020813, 1.9961166)
 [sub_resource type="BoxShape3D" id="BoxShape3D_h4iho"]
 size = Vector3(0.3953939, 0.1020813, 0.15201092)
 
+[sub_resource type="QuadMesh" id="QuadMesh_v1ijp"]
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ao34v"]
+transparency = 1
+blend_mode = 1
+emission_enabled = true
+emission = Color(1.001, 0.806, 0, 1)
+emission_energy_multiplier = 0.5
+
 [node name="Building4" unique_id=1763838847 instance=ExtResource("1_v1ijp")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." index="1" unique_id=635610154]
@@ -26,3 +36,25 @@ shape = SubResource("BoxShape3D_8a357")
 [node name="Bench" type="CollisionShape3D" parent="StaticBody3D" index="2" unique_id=500252446]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.51542294, 0.14899608, 0.94726485)
 shape = SubResource("BoxShape3D_h4iho")
+
+[node name="WindowLights" type="Node3D" parent="." index="2" unique_id=1626385770]
+
+[node name="Light1" type="MeshInstance3D" parent="WindowLights" index="0" unique_id=596748308]
+transform = Transform3D(1.4090208, 0, 0, 0, 1.9499792, 0, 0, 0, 1, 0.20162892, 0.40383834, 0.5449237)
+mesh = SubResource("QuadMesh_v1ijp")
+surface_material_override/0 = SubResource("StandardMaterial3D_ao34v")
+
+[node name="Light2" type="MeshInstance3D" parent="WindowLights" index="1" unique_id=1188149462]
+transform = Transform3D(1.4090208, 0, 0, 0, 1.9499792, 0, 0, 0, 1, 0.19651645, 1.2054689, 0.5449236)
+mesh = SubResource("QuadMesh_v1ijp")
+surface_material_override/0 = SubResource("StandardMaterial3D_ao34v")
+
+[node name="Light4" type="MeshInstance3D" parent="WindowLights" index="2" unique_id=1670244818]
+transform = Transform3D(1.4090208, 0, 0, 0, 1.9499792, 0, 0, 0, 1, -0.59987766, 1.9028273, 0.5449236)
+mesh = SubResource("QuadMesh_v1ijp")
+surface_material_override/0 = SubResource("StandardMaterial3D_ao34v")
+
+[node name="Light3" type="MeshInstance3D" parent="WindowLights" index="3" unique_id=1266516459]
+transform = Transform3D(1.4090208, 0, 0, 0, 1.5387838, 0, 0, 0, 1, 0.5980701, 1.8863934, 0.5449236)
+mesh = SubResource("QuadMesh_v1ijp")
+surface_material_override/0 = SubResource("StandardMaterial3D_ao34v")

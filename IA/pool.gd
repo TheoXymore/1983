@@ -1,7 +1,7 @@
 extends Node3D
 class_name Pool
 
-var scenes_passants:Array[PackedScene]
+var scenes_passants:Array[SpawnPassant]
 var taille_initiale = 100
 
 var libres:Array[Passant] = []
@@ -11,6 +11,13 @@ func _ready() -> void:
 	for i in taille_initiale:
 		libres.append(creer())
 		
+func select_scene()->PackedScene:
+	var poids := PackedFloat32Array()
+	for e in scenes_passants:
+		poids.append(e.poids)
+	var rng := RandomNumberGenerator.new()
+	return scenes_passants[rng.rand_weighted(poids)].scene
+
 func creer()-> Passant:
 	var p:Passant = scenes_passants.pick_random().instantiate()
 	add_child(p)

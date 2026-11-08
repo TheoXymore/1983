@@ -1,6 +1,18 @@
 extends Area3D
 class_name Passant
 
+const DOSSIER_SPRITES := "res://assets/Passants/"
+static var textures: Array[Texture2D] = []
+@onready var sprite: Sprite3D = $Sprite3D
+
+static func charger_textures() -> void:
+	if not textures.is_empty():
+		return
+	for f in DirAccess.get_files_at(DOSSIER_SPRITES):
+		f = f.trim_suffix(".import").trim_suffix(".remap")
+		if f.get_extension().to_lower() in ["png", "webp", "jpg"]:
+			textures.append(load(DOSSIER_SPRITES + f))
+
 var checkpoints:Array[Vector3]
 var position_pool:int
 var vitesse:float = 2.
@@ -16,6 +28,7 @@ var suspect : bool = false
 
 func activer(depart:Vector3,nouveau_trajet:Array[Etape])-> void:
 	global_position = depart
+	sprite.texture = textures.pick_random()
 	suspect = false
 	trajet = nouveau_trajet
 	collision_shape_3d.disabled= false
@@ -70,7 +83,7 @@ func _init() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	charger_textures()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

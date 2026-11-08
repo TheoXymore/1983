@@ -5,6 +5,7 @@ class_name Screen
 @onready var window: MeshInstance3D = $MeshInstance3D
 
 var svp: SubViewport
+@export var enabled: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

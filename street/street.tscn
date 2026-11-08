@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://wq1u4e0gv8uc"]
 
-[ext_resource type="Script" uid="uid://g1ai04fotg2n" path="res://street/camera.gd" id="1_vpklk"]
 [ext_resource type="Script" uid="uid://2cinaildy0ic" path="res://street/rue.gd" id="1_wsokd"]
 [ext_resource type="Script" uid="uid://bwl56pkkl5gtb" path="res://IA/SpawnPassant.gd" id="2_3gvki"]
 [ext_resource type="PackedScene" uid="uid://d1pyvsoumkn13" path="res://IA/passant_plotter.tscn" id="2_47aay"]
@@ -13,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bhnwtfbx5eupn" path="res://IA/zone_spawn.tscn" id="10_knc7f"]
 [ext_resource type="PackedScene" uid="uid://0tbhudja2hjc" path="res://IA/zone_checkpoint.tscn" id="11_3gvki"]
 [ext_resource type="PackedScene" uid="uid://by87pybqpltom" path="res://IA/zone_rassemblement.tscn" id="12_knc7f"]
+[ext_resource type="PackedScene" uid="uid://cx8pfquvso45c" path="res://street/street_camera.tscn" id="13_3gvki"]
 
 [sub_resource type="Resource" id="Resource_knc7f"]
 script = ExtResource("2_3gvki")
@@ -57,16 +57,12 @@ size = Vector2(24.4, 2.5)
 [sub_resource type="QuadMesh" id="QuadMesh_wsokd"]
 size = Vector2(12.4, 2.5)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_23u71"]
-height = 100.0
-radius = 0.2
-
 [node name="Street" type="Node3D" unique_id=1500921649 node_paths=PackedStringArray("spawn", "checkpoints", "rassemblements")]
 script = ExtResource("1_wsokd")
 scenes_passants = Array[ExtResource("2_3gvki")]([SubResource("Resource_knc7f")])
 spawn = NodePath("Terrain/SpawnZone")
-checkpoints = [NodePath("Terrain/ZoneCheckpoint")]
-rassemblements = [NodePath("Terrain/ZoneRassemblement")]
+checkpoints = [NodePath("Terrain/ZoneCheckpoint1"), NodePath("Terrain/ZoneCheckpoint2"), NodePath("Terrain/ZoneCheckpoint3"), NodePath("Terrain/ZoneCheckpointEnd")]
+rassemblements = [NodePath("Terrain/ZoneRassemblement"), NodePath("Terrain/ZoneRassemblement2"), NodePath("Terrain/ZoneRassemblement3"), NodePath("Terrain/ZoneRassemblement4")]
 metadata/_custom_type_script = "uid://2cinaildy0ic"
 
 [node name="Terrain" type="Node3D" parent="." unique_id=1828242891]
@@ -80,7 +76,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.024, 0)
 shape = SubResource("BoxShape3D_23u71")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Road" unique_id=1026741015]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.048, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.006701, 0.053172253, -0.003933668)
 mesh = SubResource("PlaneMesh_23u71")
 surface_material_override/0 = SubResource("StandardMaterial3D_77876")
 
@@ -382,14 +378,38 @@ mesh = SubResource("QuadMesh_wsokd")
 surface_material_override/0 = SubResource("StandardMaterial3D_4gein")
 
 [node name="SpawnZone" parent="Terrain" unique_id=199372426 instance=ExtResource("10_knc7f")]
-transform = Transform3D(-7.86805e-08, 0, -0.25, 0, 0.01, 0, 1.8, 0, -1.0927847e-08, 13.875216, 0.1, 2.013)
+transform = Transform3D(-7.86805e-08, 0, -0.25, 0, 0.01, 0, 1.8, 0, -1.0927847e-08, 28.166992, 0.1, 14.432562)
 
-[node name="ZoneCheckpoint" parent="Terrain" unique_id=1605115178 instance=ExtResource("11_3gvki")]
+[node name="ZoneCheckpointEnd" parent="Terrain" unique_id=1605115178 instance=ExtResource("11_3gvki")]
 transform = Transform3D(-7.86805e-08, 0, -0.25, 0, 0.01, 0, 1.8, 0, -1.0927847e-08, -0.92, 0.1, 2)
 
+[node name="ZoneCheckpoint1" parent="Terrain" unique_id=385018810 instance=ExtResource("11_3gvki")]
+transform = Transform3D(-1.7971822, 0, -0.17852087, 0, 0.01, 0, 1.8331821, 0, -0.1750151, 26.368248, 0.099999525, 14.327762)
+
+[node name="ZoneCheckpoint2" parent="Terrain" unique_id=1929544176 instance=ExtResource("11_3gvki")]
+transform = Transform3D(1.8, 0, 0, 0, 0.01, 0, 0, 0, 0.25, 26.18212, 0.1, 3.0947719)
+
+[node name="ZoneCheckpoint3" parent="Terrain" unique_id=1939955545 instance=ExtResource("11_3gvki")]
+transform = Transform3D(-7.86805e-08, 0, -0.25, 0, 0.01, 0, 1.8, 0, -1.0927847e-08, 25.015749, 0.1, 1.9975806)
+
 [node name="ZoneRassemblement" parent="Terrain" unique_id=1647640770 node_paths=PackedStringArray("checkpoint_precedent") instance=ExtResource("12_knc7f")]
-transform = Transform3D(-2.644539e-08, 0, -0.605, 0, 0.01, 0, 0.605, 0, -2.644539e-08, 1.991, 0.1, 1.298)
-checkpoint_precedent = NodePath("../SpawnZone")
+transform = Transform3D(-2.644539e-08, 0, -0.605, 0, 0.5, 0, 0.605, 0, -2.644539e-08, 1.991, 0.3, 1.298)
+checkpoint_precedent = NodePath("../ZoneCheckpoint3")
+probabilite = 0.25
+
+[node name="ZoneRassemblement2" parent="Terrain" unique_id=1075228060 node_paths=PackedStringArray("checkpoint_precedent") instance=ExtResource("12_knc7f")]
+transform = Transform3D(-2.644539e-08, 0, -0.605, 0, 0.5, 0, 0.605, 0, -2.644539e-08, 26.997, 0.3, 2.024)
+checkpoint_precedent = NodePath("../ZoneCheckpoint2")
+probabilite = 0.25
+
+[node name="ZoneRassemblement3" parent="Terrain" unique_id=1834472326 node_paths=PackedStringArray("checkpoint_precedent") instance=ExtResource("12_knc7f")]
+transform = Transform3D(-2.644539e-08, 0, -0.605, 0, 0.5, 0, 0.605, 0, -2.644539e-08, 25.553, 0.3, 6.169)
+checkpoint_precedent = NodePath("../ZoneCheckpoint1")
+probabilite = 0.25
+
+[node name="ZoneRassemblement4" parent="Terrain" unique_id=631786406 node_paths=PackedStringArray("checkpoint_precedent") instance=ExtResource("12_knc7f")]
+transform = Transform3D(-2.644539e-08, 0, -0.605, 0, 0.5, 0, 0.605, 0, -2.644539e-08, 21.529, 0.3, 1.48)
+checkpoint_precedent = NodePath("../ZoneCheckpoint3")
 probabilite = 0.25
 
 [node name="CamViewports" type="Node" parent="." unique_id=1211229553]
@@ -397,70 +417,21 @@ probabilite = 0.25
 [node name="CamViewport1" type="SubViewport" parent="CamViewports" unique_id=769359292]
 size = Vector2i(320, 240)
 
-[node name="Camera" type="Camera3D" parent="CamViewports/CamViewport1" unique_id=1454714244]
-transform = Transform3D(0.8660254, -0.1710101, 0.4698463, 0, 0.9396927, 0.34202018, -0.5, -0.2961982, 0.81379765, 0, 5, 0)
-current = true
-fov = 60.0
-far = 200.0
-script = ExtResource("1_vpklk")
-max_angle_left = 35.0
-max_angle_up = 20.0
-max_angle_down = 40.0
-
-[node name="OmniLight3D" type="OmniLight3D" parent="CamViewports/CamViewport1/Camera" unique_id=2098189554]
-light_color = Color(0.5418828, 0, 0, 1)
-light_energy = 0.464
-
-[node name="ShapeCast3D" type="ShapeCast3D" parent="CamViewports/CamViewport1/Camera" unique_id=52406834]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
-shape = SubResource("CylinderShape3D_23u71")
-target_position = Vector3(0, -50, 0)
-collision_mask = 2
+[node name="Camera" parent="CamViewports/CamViewport1" unique_id=779213540 instance=ExtResource("13_3gvki")]
+transform = Transform3D(0.8660254, -0.17101009, 0.4698463, 0, 0.9396926, 0.34202018, -0.5, -0.29619816, 0.81379765, 0, 5, 0)
 
 [node name="CamViewport2" type="SubViewport" parent="CamViewports" unique_id=1802022806]
 size = Vector2i(320, 240)
 
-[node name="Camera" type="Camera3D" parent="CamViewports/CamViewport2" unique_id=2044907485]
-transform = Transform3D(-4.3711392e-08, -0.34202012, 0.9396926, 0, 0.9396926, 0.34202012, -1.0000001, 1.4950174e-08, -4.1075268e-08, 0.2600665, 4.999998, -98.514145)
-current = true
-fov = 60.0
-far = 200.0
-script = ExtResource("1_vpklk")
+[node name="Camera" parent="CamViewports/CamViewport2" unique_id=318724266 instance=ExtResource("13_3gvki")]
+transform = Transform3D(-4.3711392e-08, -0.34202012, 0.93969256, 0, 0.93969256, 0.34202012, -1.0000001, 1.4950174e-08, -4.1075264e-08, 0.2600665, 4.999998, -98.514145)
 max_angle_left = 80.0
 max_angle_right = 80.0
-max_angle_up = 20.0
-max_angle_down = 40.0
-
-[node name="OmniLight3D" type="OmniLight3D" parent="CamViewports/CamViewport2/Camera" unique_id=1610075093]
-light_color = Color(0.5418828, 0, 0, 1)
-light_energy = 0.464
-
-[node name="ShapeCast3D" type="ShapeCast3D" parent="CamViewports/CamViewport2/Camera" unique_id=2086184089]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
-shape = SubResource("CylinderShape3D_23u71")
-target_position = Vector3(0, -50, 0)
-collision_mask = 2
 
 [node name="CamViewport3" type="SubViewport" parent="CamViewports" unique_id=1724950183]
 size = Vector2i(320, 240)
 
-[node name="Camera" type="Camera3D" parent="CamViewports/CamViewport3" unique_id=1133043844]
-transform = Transform3D(1, 0, 0, 0, 0.9396927, 0.34202015, 0, -0.34202015, 0.9396927, 1.6184548, 5, -99.54791)
-current = true
-fov = 60.0
-far = 200.0
-script = ExtResource("1_vpklk")
+[node name="Camera" parent="CamViewports/CamViewport3" unique_id=2044811252 instance=ExtResource("13_3gvki")]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 1.6184548, 5, -99.54791)
 max_angle_left = 80.0
 max_angle_right = 80.0
-max_angle_up = 20.0
-max_angle_down = 40.0
-
-[node name="OmniLight3D" type="OmniLight3D" parent="CamViewports/CamViewport3/Camera" unique_id=838736216]
-light_color = Color(0.5418828, 0, 0, 1)
-light_energy = 0.464
-
-[node name="ShapeCast3D" type="ShapeCast3D" parent="CamViewports/CamViewport3/Camera" unique_id=784555190]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
-shape = SubResource("CylinderShape3D_23u71")
-target_position = Vector3(0, -50, 0)
-collision_mask = 2

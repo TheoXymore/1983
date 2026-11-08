@@ -17,3 +17,8 @@ func _on_area_exited(area: Area3D) -> void:
 		var index = passants.find(area)
 		if index >= 0 and index < passants.size():
 			passants.remove_at(index)
+
+func disperse() -> void:
+	for passant in passants:
+		# if passant.est_suspect(): game_state.augmenter_score()
+		passant.lancer_depuis(passant.etape_courante+1)

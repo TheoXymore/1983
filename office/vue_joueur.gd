@@ -38,9 +38,8 @@ func _process(delta: float) -> void:
 func select_screen_under_crosshair():
 	collided_object = ray_cast_3d.get_collider()
 	
-	if collided_object is Screen:
+	if collided_object is Screen and collided_object.enabled:
 		current_object = collided_object
-		print(current_object)
 		move_camera_to_global_position(current_object.anchor.global_position, current_object.anchor.global_rotation, false)
 		
 	elif collided_object is Phone:

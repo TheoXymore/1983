@@ -35,8 +35,10 @@ func rotate_camera(mouse_delta: Vector2) -> void:
 	rotation.x = deg_to_rad(x_rot)
 	
 func catch_npc():
-	var npcs = shapecast.collision_result
-	
+	for i in shapecast.get_collision_count():
+		var area = shapecast.get_collider(i)
+		if area is ZoneRassemblement:
+			area.disperse()
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("select"):

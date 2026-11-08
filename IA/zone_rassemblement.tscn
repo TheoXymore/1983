@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://by87pybqpltom"]
+
+[ext_resource type="Script" uid="uid://dagkq65xl2tly" path="res://IA/zone_rassemblement.gd" id="1_0mx78"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mipum"]
+
+[node name="ZoneRassemblement" type="Area3D" unique_id=1647640770]
+script = ExtResource("1_0mx78")
+metadata/_custom_type_script = "uid://dagkq65xl2tly"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=560099488]
+shape = SubResource("BoxShape3D_mipum")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

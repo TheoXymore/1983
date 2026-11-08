@@ -1,0 +1,2 @@
+extends Passant
+class_name PassantBait

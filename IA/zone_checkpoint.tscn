@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://0tbhudja2hjc"]
+
+[ext_resource type="Script" uid="uid://cu2cff2kife5e" path="res://IA/zone_checkpoint.gd" id="1_4i4ud"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mipum"]
+
+[node name="ZoneCheckpoint" type="Area3D" unique_id=1605115178]
+script = ExtResource("1_4i4ud")
+metadata/_custom_type_script = "uid://cu2cff2kife5e"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=156791982]
+shape = SubResource("BoxShape3D_mipum")

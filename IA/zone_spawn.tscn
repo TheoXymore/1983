@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bhnwtfbx5eupn"]
+
+[ext_resource type="Script" uid="uid://c57ufi47yxsjv" path="res://IA/zone_spawn.gd" id="1_q301j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mipum"]
+
+[node name="SpawnZone" type="Area3D" unique_id=199372426]
+script = ExtResource("1_q301j")
+metadata/_custom_type_script = "uid://c57ufi47yxsjv"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2020073000]
+shape = SubResource("BoxShape3D_mipum")
+disabled = true

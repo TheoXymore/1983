@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bgittxxt76yij" path="res://office/Night Stand by Quaternius - 9LI73c5uFA.glb" id="10_vac0n"]
 [ext_resource type="PackedScene" uid="uid://d20cmvdr4im5q" path="res://office/phone.tscn" id="14_ail1s"]
 [ext_resource type="PackedScene" uid="uid://cpss1yoksse8" path="res://office/Door by Quaternius - a948jjnuaL.glb" id="14_f36xe"]
+[ext_resource type="Script" uid="uid://bpg246vonoqle" path="res://office/dialogue_box.gd" id="15_ail1s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sfkqm"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -199,5 +200,29 @@ transform = Transform3D(0.07699998, 0, 0, 0, 0.046599984, 0, 0, 0, 0.07699998, 0
 [node name="Door" parent="." unique_id=788658171 instance=ExtResource("14_f36xe")]
 transform = Transform3D(-3.934025e-08, 0, 0.9, 0, 0.9, 0, -0.9, 0, -3.934025e-08, -1.5117915, 0.07559198, -0.34522367)
 
-[node name="Phone" parent="." unique_id=629982819 instance=ExtResource("14_ail1s")]
+[node name="Phone" parent="." unique_id=629982819 node_paths=PackedStringArray("dialogue_box") instance=ExtResource("14_ail1s")]
 transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 0.9309293, 1.1868492, 0)
+dialogue_box = NodePath("../DialogueBox")
+
+[node name="DialogueBox" type="CanvasLayer" parent="." unique_id=1265874095]
+script = ExtResource("15_ail1s")
+
+[node name="Panel" type="PanelContainer" parent="DialogueBox" unique_id=29395266]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DialogueBox/Panel" unique_id=1392838445]
+layout_mode = 2
+
+[node name="CallerLabel" type="Label" parent="DialogueBox/Panel/VBoxContainer" unique_id=1243628398]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="TextLabel" type="Label" parent="DialogueBox/Panel/VBoxContainer" unique_id=609237873]
+layout_mode = 2
+horizontal_alignment = 1

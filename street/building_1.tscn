@@ -14,6 +14,16 @@ size = Vector3(1.9976892, 0.1020813, 1.9961166)
 [sub_resource type="BoxShape3D" id="BoxShape3D_s5427"]
 size = Vector3(0.30421555, 0.1020813, 0.15201092)
 
+[sub_resource type="QuadMesh" id="QuadMesh_23u71"]
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_77876"]
+transparency = 1
+blend_mode = 1
+emission_enabled = true
+emission = Color(1.001, 0.806, 0, 1)
+emission_energy_multiplier = 0.5
+
 [node name="Building1" unique_id=1734928773 instance=ExtResource("1_yr0vr")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." index="1" unique_id=1430625414]
@@ -33,3 +43,35 @@ shape = SubResource("BoxShape3D_0nkpo")
 [node name="Bench" type="CollisionShape3D" parent="StaticBody3D" index="3" unique_id=1188159791]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5978338, 0.14899608, 0.9018558)
 shape = SubResource("BoxShape3D_s5427")
+
+[node name="WindowLights" type="Node3D" parent="." index="2" unique_id=1866550340]
+
+[node name="Light1" type="MeshInstance3D" parent="WindowLights" index="0" unique_id=115031957]
+transform = Transform3D(1.4090208, 0, 0, 0, 1.9499792, 0, 0, 0, 1, 0, 0.40383834, 0.5449237)
+mesh = SubResource("QuadMesh_23u71")
+surface_material_override/0 = SubResource("StandardMaterial3D_77876")
+
+[node name="Light2" type="MeshInstance3D" parent="WindowLights" index="1" unique_id=941464796]
+transform = Transform3D(1.4090208, 0, 0, 0, 1.9499792, 0, 0, 0, 1, -0.80006945, 1.2054689, 0.5449236)
+mesh = SubResource("QuadMesh_23u71")
+surface_material_override/0 = SubResource("StandardMaterial3D_77876")
+
+[node name="Light4" type="MeshInstance3D" parent="WindowLights" index="2" unique_id=844983986]
+transform = Transform3D(1.4090208, 0, 0, 0, 1.9499792, 0, 0, 0, 1, -0.80006945, 2.6057522, 0.5449236)
+mesh = SubResource("QuadMesh_23u71")
+surface_material_override/0 = SubResource("StandardMaterial3D_77876")
+
+[node name="Light5" type="MeshInstance3D" parent="WindowLights" index="3" unique_id=1793692963]
+transform = Transform3D(1.4090208, 0, 0, 0, 1.9499792, 0, 0, 0, 1, 0.39555508, 1.9060161, 0.34766465)
+mesh = SubResource("QuadMesh_23u71")
+surface_material_override/0 = SubResource("StandardMaterial3D_77876")
+
+[node name="Light3" type="MeshInstance3D" parent="WindowLights" index="4" unique_id=2012320563]
+transform = Transform3D(1.4090208, 0, 0, 0, 1.2258842, 0, 0, 0, 1, -0.40186733, 1.8665885, 0.5449236)
+mesh = SubResource("QuadMesh_23u71")
+surface_material_override/0 = SubResource("StandardMaterial3D_77876")
+
+[node name="Light6" type="MeshInstance3D" parent="WindowLights" index="5" unique_id=162857055]
+transform = Transform3D(1.4090208, 0, 0, 0, 1.2258842, 0, 0, 0, 1, 0.8000633, 1.1634785, 0.3484996)
+mesh = SubResource("QuadMesh_23u71")
+surface_material_override/0 = SubResource("StandardMaterial3D_77876")

@@ -25,6 +25,7 @@ radius = 0.03173828
 transform = Transform3D(0.9474168, -1.39877425e-08, 0.32000226, -0.32000226, -4.1412903e-08, 0.9474168, 0, -1, -4.371139e-08, -0.20449069, 0.8749967, 0)
 light_color = Color(1, 0.8862745, 0, 1)
 light_energy = 16.0
+light_bake_mode = 1
 shadow_enabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2" unique_id=1263771735]

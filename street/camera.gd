@@ -13,19 +13,24 @@ extends Camera3D
 var y_rot: float
 var x_rot: float
 
+var init_x_rot: float
+var init_y_rot: float
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	y_rot = rad_to_deg(rotation.y)
 	x_rot = rad_to_deg(rotation.x)
+	init_x_rot = x_rot
+	init_y_rot = y_rot
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		rotate_camera(event.relative)
 
 func rotate_camera(mouse_delta: Vector2) -> void:
-	y_rot = clamp(y_rot - mouse_delta.x * mouse_sensitivity * camera_speed, max_angle_right, max_angle_left)
-	x_rot = clamp(x_rot - mouse_delta.y * mouse_sensitivity * camera_speed, -max_angle_down, max_angle_up)
+	y_rot = clamp(y_rot - mouse_delta.x * mouse_sensitivity * camera_speed, init_y_rot - max_angle_right, init_y_rot + max_angle_left)
+	x_rot = clamp(x_rot - mouse_delta.y * mouse_sensitivity * camera_speed, init_x_rot - max_angle_down, init_x_rot + max_angle_up)
 	rotation.y = deg_to_rad(y_rot)
 	rotation.x = deg_to_rad(x_rot)
 	

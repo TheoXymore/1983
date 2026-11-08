@@ -4,7 +4,7 @@ class_name Screen
 @onready var anchor: Node3D = $Anchor
 @onready var window: MeshInstance3D = $MeshInstance3D
 
-var rue:SubViewport
+var svp: SubViewport
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

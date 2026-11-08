@@ -15,19 +15,25 @@
 [ext_resource type="PackedScene" uid="uid://d20cmvdr4im5q" path="res://office/phone.tscn" id="14_ail1s"]
 [ext_resource type="PackedScene" uid="uid://cpss1yoksse8" path="res://office/Door by Quaternius - a948jjnuaL.glb" id="14_f36xe"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f36xe"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sfkqm"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_ail1s"]
-sky_material = SubResource("ProceduralSkyMaterial_f36xe")
+[sub_resource type="Sky" id="Sky_wsokd"]
+sky_material = SubResource("ProceduralSkyMaterial_sfkqm")
 
-[sub_resource type="Environment" id="Environment_oj0vh"]
+[sub_resource type="Environment" id="Environment_8pg2w"]
 background_mode = 2
-sky = SubResource("Sky_ail1s")
-ambient_light_sky_contribution = 0.0
-ambient_light_energy = 0.0
+sky = SubResource("Sky_wsokd")
+ambient_light_source = 3
+ambient_light_sky_contribution = 0.05
+reflected_light_source = 2
 glow_enabled = true
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.5125687, 0.547878, 0.60280436, 1)
+fog_density = 1.0
+fog_depth_curve = 0.5031917
 
 [sub_resource type="BoxMesh" id="BoxMesh_25aah"]
 
@@ -56,10 +62,10 @@ uv1_scale = Vector3(10, 10, 10)
 [node name="Salle_Surveillance" type="Node3D" unique_id=904370933 node_paths=PackedStringArray("ecrans")]
 script = ExtResource("1_s03c4")
 ecrans = [NodePath("Screen1"), NodePath("Screen2"), NodePath("Screen3"), NodePath("Screen4"), NodePath("Screen5"), NodePath("Screen6")]
-rues = Array[PackedScene]([ExtResource("2_5j1s6"), ExtResource("2_5j1s6"), ExtResource("2_5j1s6"), ExtResource("2_5j1s6"), ExtResource("2_5j1s6"), ExtResource("2_5j1s6")])
+rue = ExtResource("2_5j1s6")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1618774863]
-environment = SubResource("Environment_oj0vh")
+environment = SubResource("Environment_8pg2w")
 
 [node name="Lumiere_Plafond" type="SpotLight3D" parent="." unique_id=1880976669]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.7739465, -0.9984643)

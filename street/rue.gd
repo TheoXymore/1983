@@ -1,4 +1,4 @@
-extends SubViewport
+extends Node3D
 class_name Rue
 
 var pool_passants:Pool = Pool.new()

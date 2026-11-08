@@ -19,7 +19,7 @@ func select_scene()->PackedScene:
 	return scenes_passants[rng.rand_weighted(poids)].scene
 
 func creer()-> Passant:
-	var p:Passant = scenes_passants.pick_random().instantiate()
+	var p: Passant = select_scene().instantiate()
 	add_child(p)
 	p.desactiver()
 	p.arrive.connect(passant_arrive)

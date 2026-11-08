@@ -2,22 +2,26 @@ extends Node3D
 
 @export var ecrans:Array[Screen]
 
-@export var rues:Array[PackedScene]
-var rues_scenes:Array[SubViewport]
+@export var rue: PackedScene
+@export_range(0.0,100.0,1.0) var world_height: float = 10.0
+var camViewports: Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for i in ecrans.size():
-		var rue = rues[i].instantiate()
-		add_child(rue)
-		rues_scenes.append(rue)
-		
+	var rue_node: Rue = rue.instantiate()
+	add_child(rue_node)
+	rue_node.position.y = world_height;
+	camViewports = rue_node.get_child(1)
+	for i in camViewports.get_child_count():
+		var svp: SubViewport = camViewports.get_child(i)
 		var mat = StandardMaterial3D.new()
-		mat.albedo_texture = rue.get_texture()
+		mat.albedo_texture = svp.get_texture()
 		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 		ecrans[i].window.material_override = mat
+		ecrans[i].svp = svp
 		
-		ecrans[i].rue = rue
+		var cam: Camera3D = svp.get_child(0)
+		cam.position.y += world_height
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

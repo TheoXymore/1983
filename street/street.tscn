@@ -1,32 +1,24 @@
 [gd_scene format=3 uid="uid://wq1u4e0gv8uc"]
 
 [ext_resource type="Script" uid="uid://g1ai04fotg2n" path="res://street/camera.gd" id="1_vpklk"]
+[ext_resource type="Script" uid="uid://2cinaildy0ic" path="res://street/rue.gd" id="1_wsokd"]
+[ext_resource type="Script" uid="uid://bwl56pkkl5gtb" path="res://IA/SpawnPassant.gd" id="2_3gvki"]
+[ext_resource type="PackedScene" uid="uid://d1pyvsoumkn13" path="res://IA/passant_plotter.tscn" id="2_47aay"]
 [ext_resource type="PackedScene" uid="uid://b0166o0m1eyex" path="res://street/building_1.tscn" id="2_eaort"]
 [ext_resource type="PackedScene" uid="uid://ddyc4mtc8i046" path="res://street/building_2.tscn" id="3_n78di"]
 [ext_resource type="PackedScene" uid="uid://chpwn11wjsjyb" path="res://street/building_3.tscn" id="4_ufndw"]
 [ext_resource type="PackedScene" uid="uid://dhq2t1i8a3ktm" path="res://street/building_4.tscn" id="5_sfkqm"]
 [ext_resource type="PackedScene" uid="uid://bgwyqyr741lm2" path="res://street/building_5.tscn" id="6_wsokd"]
 [ext_resource type="PackedScene" uid="uid://to6a4cxl4pbb" path="res://street/streetlight.tscn" id="7_sfkqm"]
+[ext_resource type="PackedScene" uid="uid://bhnwtfbx5eupn" path="res://IA/zone_spawn.tscn" id="10_knc7f"]
+[ext_resource type="PackedScene" uid="uid://0tbhudja2hjc" path="res://IA/zone_checkpoint.tscn" id="11_3gvki"]
+[ext_resource type="PackedScene" uid="uid://by87pybqpltom" path="res://IA/zone_rassemblement.tscn" id="12_knc7f"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sfkqm"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-
-[sub_resource type="Sky" id="Sky_wsokd"]
-sky_material = SubResource("ProceduralSkyMaterial_sfkqm")
-
-[sub_resource type="Environment" id="Environment_8pg2w"]
-background_mode = 2
-sky = SubResource("Sky_wsokd")
-ambient_light_source = 3
-ambient_light_sky_contribution = 0.05
-reflected_light_source = 2
-glow_enabled = true
-fog_enabled = true
-fog_mode = 1
-fog_light_color = Color(0.5125687, 0.547878, 0.60280436, 1)
-fog_density = 1.0
-fog_depth_curve = 0.5031917
+[sub_resource type="Resource" id="Resource_knc7f"]
+script = ExtResource("2_3gvki")
+scene = ExtResource("2_47aay")
+poids = 1.0
+metadata/_custom_type_script = "uid://bwl56pkkl5gtb"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_23u71"]
 size = Vector3(28, 0.054, 2.5)
@@ -69,352 +61,366 @@ size = Vector2(12.4, 2.5)
 height = 100.0
 radius = 0.2
 
-[node name="Street" type="Node3D" unique_id=421064926]
+[node name="Street" type="Node3D" unique_id=1500921649 node_paths=PackedStringArray("spawn", "checkpoints", "rassemblements")]
+script = ExtResource("1_wsokd")
+scenes_passants = Array[ExtResource("2_3gvki")]([SubResource("Resource_knc7f")])
+spawn = NodePath("Terrain/SpawnZone")
+checkpoints = [NodePath("Terrain/ZoneCheckpoint")]
+rassemblements = [NodePath("Terrain/ZoneRassemblement")]
+metadata/_custom_type_script = "uid://2cinaildy0ic"
 
-[node name="WorldViewport" type="SubViewport" parent="." unique_id=534920266]
-size = Vector2i(320, 240)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="WorldViewport" unique_id=1166704660]
-environment = SubResource("Environment_8pg2w")
-
-[node name="Terrain" type="Node3D" parent="WorldViewport" unique_id=1828242891]
+[node name="Terrain" type="Node3D" parent="." unique_id=1828242891]
 transform = Transform3D(-1.7484555e-07, 0, 4, 0, 4, 0, -4, 0, -1.7484555e-07, -13, 0, 0)
 
-[node name="Road" type="StaticBody3D" parent="WorldViewport/Terrain" unique_id=1951794545]
+[node name="Road" type="StaticBody3D" parent="Terrain" unique_id=1951794545]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldViewport/Terrain/Road" unique_id=317533755]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Road" unique_id=317533755]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.024, 0)
 shape = SubResource("BoxShape3D_23u71")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldViewport/Terrain/Road" unique_id=1026741015]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Road" unique_id=1026741015]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.048, 0)
 mesh = SubResource("PlaneMesh_23u71")
 surface_material_override/0 = SubResource("StandardMaterial3D_77876")
 
-[node name="Road2" type="StaticBody3D" parent="WorldViewport/Terrain" unique_id=1599755390]
+[node name="Road2" type="StaticBody3D" parent="Terrain" unique_id=1599755390]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 26.2, 0, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldViewport/Terrain/Road2" unique_id=1505178635]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Road2" unique_id=1505178635]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.024, 0)
 shape = SubResource("BoxShape3D_sfkqm")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldViewport/Terrain/Road2" unique_id=1887072617]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Road2" unique_id=1887072617]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.048, 0)
 mesh = SubResource("PlaneMesh_wsokd")
 surface_material_override/0 = SubResource("StandardMaterial3D_77876")
 
-[node name="Road3" type="StaticBody3D" parent="WorldViewport/Terrain" unique_id=1844580420]
+[node name="Road3" type="StaticBody3D" parent="Terrain" unique_id=1844580420]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2, 0, 14.4)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldViewport/Terrain/Road3" unique_id=97268397]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Road3" unique_id=97268397]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.024, 0)
 shape = SubResource("BoxShape3D_wsokd")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldViewport/Terrain/Road3" unique_id=1779079861]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Road3" unique_id=1779079861]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.048, 0)
 mesh = SubResource("PlaneMesh_8pg2w")
 surface_material_override/0 = SubResource("StandardMaterial3D_77876")
 
-[node name="Buildings" type="Node3D" parent="WorldViewport/Terrain" unique_id=712208753]
+[node name="Buildings" type="Node3D" parent="Terrain" unique_id=712208753]
 
-[node name="Building1_1" parent="WorldViewport/Terrain/Buildings" unique_id=1734928773 instance=ExtResource("2_eaort")]
+[node name="Building1_1" parent="Terrain/Buildings" unique_id=1734928773 instance=ExtResource("2_eaort")]
 
-[node name="Building1_6" parent="WorldViewport/Terrain/Buildings" unique_id=1807102432 instance=ExtResource("2_eaort")]
+[node name="Building1_6" parent="Terrain/Buildings" unique_id=1807102432 instance=ExtResource("2_eaort")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
 
-[node name="Building1_3" parent="WorldViewport/Terrain/Buildings" unique_id=482899753 instance=ExtResource("2_eaort")]
+[node name="Building1_3" parent="Terrain/Buildings" unique_id=482899753 instance=ExtResource("2_eaort")]
 transform = Transform3D(-1, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -1, 2, 0, 4)
 
-[node name="Building1_4" parent="WorldViewport/Terrain/Buildings" unique_id=2032788102 instance=ExtResource("2_eaort")]
+[node name="Building1_4" parent="Terrain/Buildings" unique_id=2032788102 instance=ExtResource("2_eaort")]
 transform = Transform3D(1, 0, -1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 8, 0, 4)
 
-[node name="Building1_5" parent="WorldViewport/Terrain/Buildings" unique_id=1276384667 instance=ExtResource("2_eaort")]
+[node name="Building1_5" parent="Terrain/Buildings" unique_id=1276384667 instance=ExtResource("2_eaort")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 18, 0, 4)
 
-[node name="Building1_7" parent="WorldViewport/Terrain/Buildings" unique_id=999886119 instance=ExtResource("2_eaort")]
+[node name="Building1_7" parent="Terrain/Buildings" unique_id=999886119 instance=ExtResource("2_eaort")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 24.2, 0, 8.2)
 
-[node name="Building1_9" parent="WorldViewport/Terrain/Buildings" unique_id=1992681965 instance=ExtResource("2_eaort")]
+[node name="Building1_9" parent="Terrain/Buildings" unique_id=1992681965 instance=ExtResource("2_eaort")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 28.4, 0, 5.6)
 
-[node name="Building1_8" parent="WorldViewport/Terrain/Buildings" unique_id=2027378114 instance=ExtResource("2_eaort")]
+[node name="Building1_8" parent="Terrain/Buildings" unique_id=2027378114 instance=ExtResource("2_eaort")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 24.2, 0, 14.2)
 
-[node name="Building1_2" parent="WorldViewport/Terrain/Buildings" unique_id=1015549537 instance=ExtResource("2_eaort")]
+[node name="Building1_2" parent="Terrain/Buildings" unique_id=1015549537 instance=ExtResource("2_eaort")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
 
-[node name="Building2_1" parent="WorldViewport/Terrain/Buildings" unique_id=137915903 instance=ExtResource("3_n78di")]
+[node name="Building2_1" parent="Terrain/Buildings" unique_id=137915903 instance=ExtResource("3_n78di")]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
-[node name="Building2_9" parent="WorldViewport/Terrain/Buildings" unique_id=553850350 instance=ExtResource("3_n78di")]
+[node name="Building2_9" parent="Terrain/Buildings" unique_id=553850350 instance=ExtResource("3_n78di")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 24.2, 0, 10.2)
 
-[node name="Building2_4" parent="WorldViewport/Terrain/Buildings" unique_id=1795268283 instance=ExtResource("3_n78di")]
+[node name="Building2_4" parent="Terrain/Buildings" unique_id=1795268283 instance=ExtResource("3_n78di")]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
-[node name="Building2_5" parent="WorldViewport/Terrain/Buildings" unique_id=934511269 instance=ExtResource("3_n78di")]
+[node name="Building2_5" parent="Terrain/Buildings" unique_id=934511269 instance=ExtResource("3_n78di")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 6, 0, 4)
 
-[node name="Building2_6" parent="WorldViewport/Terrain/Buildings" unique_id=952555889 instance=ExtResource("3_n78di")]
+[node name="Building2_6" parent="Terrain/Buildings" unique_id=952555889 instance=ExtResource("3_n78di")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 16, 0, 4)
 
-[node name="Building2_7" parent="WorldViewport/Terrain/Buildings" unique_id=2137452973 instance=ExtResource("3_n78di")]
+[node name="Building2_7" parent="Terrain/Buildings" unique_id=2137452973 instance=ExtResource("3_n78di")]
 transform = Transform3D(1, 0, -1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 22, 0, 4)
 
-[node name="Building2_8" parent="WorldViewport/Terrain/Buildings" unique_id=1151558122 instance=ExtResource("3_n78di")]
+[node name="Building2_8" parent="Terrain/Buildings" unique_id=1151558122 instance=ExtResource("3_n78di")]
 transform = Transform3D(-4.371139e-08, -3.821371e-15, -1, -8.742278e-08, 1, 0, -1, -8.742278e-08, 4.371139e-08, 28.4, 0, 3.6)
 
-[node name="Building2_10" parent="WorldViewport/Terrain/Buildings" unique_id=720510689 instance=ExtResource("3_n78di")]
+[node name="Building2_10" parent="Terrain/Buildings" unique_id=720510689 instance=ExtResource("3_n78di")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 28.4, 0, 11.6)
 
-[node name="Building2_2" parent="WorldViewport/Terrain/Buildings" unique_id=918900322 instance=ExtResource("3_n78di")]
+[node name="Building2_2" parent="Terrain/Buildings" unique_id=918900322 instance=ExtResource("3_n78di")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 
-[node name="Building2_3" parent="WorldViewport/Terrain/Buildings" unique_id=2056603301 instance=ExtResource("3_n78di")]
+[node name="Building2_3" parent="Terrain/Buildings" unique_id=2056603301 instance=ExtResource("3_n78di")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 0)
 
-[node name="Building3_1" parent="WorldViewport/Terrain/Buildings" unique_id=1203449228 instance=ExtResource("4_ufndw")]
+[node name="Building3_1" parent="Terrain/Buildings" unique_id=1203449228 instance=ExtResource("4_ufndw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9999998, 0, 0)
 
-[node name="Building3_3" parent="WorldViewport/Terrain/Buildings" unique_id=1761548043 instance=ExtResource("4_ufndw")]
+[node name="Building3_3" parent="Terrain/Buildings" unique_id=1761548043 instance=ExtResource("4_ufndw")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4, 0, 4)
 
-[node name="Building3_5" parent="WorldViewport/Terrain/Buildings" unique_id=1012624750 instance=ExtResource("4_ufndw")]
+[node name="Building3_5" parent="Terrain/Buildings" unique_id=1012624750 instance=ExtResource("4_ufndw")]
 transform = Transform3D(1, 0, -1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 14, 0, 4)
 
-[node name="Building3_2" parent="WorldViewport/Terrain/Buildings" unique_id=496745532 instance=ExtResource("4_ufndw")]
+[node name="Building3_2" parent="Terrain/Buildings" unique_id=496745532 instance=ExtResource("4_ufndw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0)
 
-[node name="Building3_6" parent="WorldViewport/Terrain/Buildings" unique_id=764153115 instance=ExtResource("4_ufndw")]
+[node name="Building3_6" parent="Terrain/Buildings" unique_id=764153115 instance=ExtResource("4_ufndw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 0)
 
-[node name="Building3_7" parent="WorldViewport/Terrain/Buildings" unique_id=1648509572 instance=ExtResource("4_ufndw")]
+[node name="Building3_7" parent="Terrain/Buildings" unique_id=1648509572 instance=ExtResource("4_ufndw")]
 transform = Transform3D(-1, 0, 0, 0, 1, -8.742278e-08, 0, 8.742278e-08, 1, 28, 0, 0)
 
-[node name="Building3_8" parent="WorldViewport/Terrain/Buildings" unique_id=1283514003 instance=ExtResource("4_ufndw")]
+[node name="Building3_8" parent="Terrain/Buildings" unique_id=1283514003 instance=ExtResource("4_ufndw")]
 transform = Transform3D(4.371139e-08, 8.742278e-08, -1, 0, 1, 8.742278e-08, -1, 3.821371e-15, -4.371139e-08, 28.4, 0, 1.6)
 
-[node name="Building3_10" parent="WorldViewport/Terrain/Buildings" unique_id=615608418 instance=ExtResource("4_ufndw")]
+[node name="Building3_10" parent="Terrain/Buildings" unique_id=615608418 instance=ExtResource("4_ufndw")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 28.4, 0, 7.6)
 
-[node name="Building3_9" parent="WorldViewport/Terrain/Buildings" unique_id=529803100 instance=ExtResource("4_ufndw")]
+[node name="Building3_9" parent="Terrain/Buildings" unique_id=529803100 instance=ExtResource("4_ufndw")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 24.2, 0, 12.2)
 
-[node name="Building3_11" parent="WorldViewport/Terrain/Buildings" unique_id=626940576 instance=ExtResource("4_ufndw")]
+[node name="Building3_11" parent="Terrain/Buildings" unique_id=626940576 instance=ExtResource("4_ufndw")]
 transform = Transform3D(4.371139e-08, 8.742278e-08, 1, 0, 1, -8.742278e-08, 1, -3.821371e-15, -4.371139e-08, 24.2, 0, 16.2)
 
-[node name="Building3_12" parent="WorldViewport/Terrain/Buildings" unique_id=2133629542 instance=ExtResource("4_ufndw")]
+[node name="Building3_12" parent="Terrain/Buildings" unique_id=2133629542 instance=ExtResource("4_ufndw")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 24.6, 0, 16.6)
 
-[node name="Building3_4" parent="WorldViewport/Terrain/Buildings" unique_id=1710651059 instance=ExtResource("4_ufndw")]
+[node name="Building3_4" parent="Terrain/Buildings" unique_id=1710651059 instance=ExtResource("4_ufndw")]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
 
-[node name="Building4_1" parent="WorldViewport/Terrain/Buildings" unique_id=1763838847 instance=ExtResource("5_sfkqm")]
+[node name="Building4_1" parent="Terrain/Buildings" unique_id=1763838847 instance=ExtResource("5_sfkqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 
-[node name="Building4_4" parent="WorldViewport/Terrain/Buildings" unique_id=1307220076 instance=ExtResource("5_sfkqm")]
+[node name="Building4_4" parent="Terrain/Buildings" unique_id=1307220076 instance=ExtResource("5_sfkqm")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 10, 0, 4)
 
-[node name="Building4_5" parent="WorldViewport/Terrain/Buildings" unique_id=1218158073 instance=ExtResource("5_sfkqm")]
+[node name="Building4_5" parent="Terrain/Buildings" unique_id=1218158073 instance=ExtResource("5_sfkqm")]
 transform = Transform3D(1, 0, -1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 20, 0, 4)
 
-[node name="Building4_6" parent="WorldViewport/Terrain/Buildings" unique_id=1034565956 instance=ExtResource("5_sfkqm")]
+[node name="Building4_6" parent="Terrain/Buildings" unique_id=1034565956 instance=ExtResource("5_sfkqm")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 24.2, 0, 6.2)
 
-[node name="Building4_7" parent="WorldViewport/Terrain/Buildings" unique_id=698648553 instance=ExtResource("5_sfkqm")]
+[node name="Building4_7" parent="Terrain/Buildings" unique_id=698648553 instance=ExtResource("5_sfkqm")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 28.4, 0, 9.6)
 
-[node name="Building4_2" parent="WorldViewport/Terrain/Buildings" unique_id=1628103800 instance=ExtResource("5_sfkqm")]
+[node name="Building4_2" parent="Terrain/Buildings" unique_id=1628103800 instance=ExtResource("5_sfkqm")]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
 
-[node name="Building4_3" parent="WorldViewport/Terrain/Buildings" unique_id=696096139 instance=ExtResource("5_sfkqm")]
+[node name="Building4_3" parent="Terrain/Buildings" unique_id=696096139 instance=ExtResource("5_sfkqm")]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 0)
 
-[node name="Building5_1" parent="WorldViewport/Terrain/Buildings" unique_id=1018070901 instance=ExtResource("6_wsokd")]
+[node name="Building5_1" parent="Terrain/Buildings" unique_id=1018070901 instance=ExtResource("6_wsokd")]
 transform = Transform3D(-1, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -1, 1.4210855e-14, 0, 4)
 
-[node name="Building5_3" parent="WorldViewport/Terrain/Buildings" unique_id=524283565 instance=ExtResource("6_wsokd")]
+[node name="Building5_3" parent="Terrain/Buildings" unique_id=524283565 instance=ExtResource("6_wsokd")]
 transform = Transform3D(1, 0, -1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 12, 0, 4)
 
-[node name="Building5_4" parent="WorldViewport/Terrain/Buildings" unique_id=2074981350 instance=ExtResource("6_wsokd")]
+[node name="Building5_4" parent="Terrain/Buildings" unique_id=2074981350 instance=ExtResource("6_wsokd")]
 transform = Transform3D(1, 0, -1.5099579e-07, 0, 1, 0, -1.5099579e-07, 0, -1, 24, 0, 4)
 
-[node name="Building5_6" parent="WorldViewport/Terrain/Buildings" unique_id=501646809 instance=ExtResource("6_wsokd")]
+[node name="Building5_6" parent="Terrain/Buildings" unique_id=501646809 instance=ExtResource("6_wsokd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0, 12.2)
 
-[node name="Building5_5" parent="WorldViewport/Terrain/Buildings" unique_id=817326508 instance=ExtResource("6_wsokd")]
+[node name="Building5_5" parent="Terrain/Buildings" unique_id=817326508 instance=ExtResource("6_wsokd")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 24.2, 0, 4.2)
 
-[node name="Building5_2" parent="WorldViewport/Terrain/Buildings" unique_id=917553839 instance=ExtResource("6_wsokd")]
+[node name="Building5_2" parent="Terrain/Buildings" unique_id=917553839 instance=ExtResource("6_wsokd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0)
 
-[node name="Streetlights" type="Node3D" parent="WorldViewport/Terrain" unique_id=802540400]
+[node name="Streetlights" type="Node3D" parent="Terrain" unique_id=802540400]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1, 0.1, 1)
 
-[node name="Streetlight13" parent="WorldViewport/Terrain/Streetlights" unique_id=136029168 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight13" parent="Terrain/Streetlights" unique_id=136029168 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.1000009, 0, 22)
 
-[node name="Streetlight24" parent="WorldViewport/Terrain/Streetlights" unique_id=1196694688 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight24" parent="Terrain/Streetlights" unique_id=1196694688 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.1, 0, 24.201971)
 
-[node name="Streetlight25" parent="WorldViewport/Terrain/Streetlights" unique_id=816585796 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight25" parent="Terrain/Streetlights" unique_id=816585796 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, -0.70710677, -2.4478545, 0, 25.756056)
 
-[node name="Streetlight29" parent="WorldViewport/Terrain/Streetlights" unique_id=1934213404 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight29" parent="Terrain/Streetlights" unique_id=1934213404 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -4.2, 0, 26.1)
 
-[node name="Streetlight30" parent="WorldViewport/Terrain/Streetlights" unique_id=2074791905 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight30" parent="Terrain/Streetlights" unique_id=2074791905 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -6.2, 0, 26.1)
 
-[node name="Streetlight31" parent="WorldViewport/Terrain/Streetlights" unique_id=501191871 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight31" parent="Terrain/Streetlights" unique_id=501191871 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -8.1, 0, 26.1)
 
-[node name="Streetlight32" parent="WorldViewport/Terrain/Streetlights" unique_id=1969091755 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight32" parent="Terrain/Streetlights" unique_id=1969091755 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -10.2, 0, 26.1)
 
-[node name="Streetlight33" parent="WorldViewport/Terrain/Streetlights" unique_id=311809859 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight33" parent="Terrain/Streetlights" unique_id=311809859 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -12.2, 0, 26.1)
 
-[node name="Streetlight34" parent="WorldViewport/Terrain/Streetlights" unique_id=488634822 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight34" parent="Terrain/Streetlights" unique_id=488634822 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, -14.2, 0, 26.1)
 
-[node name="Streetlight14" parent="WorldViewport/Terrain/Streetlights" unique_id=138562800 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight14" parent="Terrain/Streetlights" unique_id=138562800 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.1000006, 0, 20)
 
-[node name="Streetlight15" parent="WorldViewport/Terrain/Streetlights" unique_id=1044275067 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight15" parent="Terrain/Streetlights" unique_id=1044275067 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.1000006, 0, 18)
 
-[node name="Streetlight16" parent="WorldViewport/Terrain/Streetlights" unique_id=27022819 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight16" parent="Terrain/Streetlights" unique_id=27022819 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.1000004, 0, 16)
 
-[node name="Streetlight17" parent="WorldViewport/Terrain/Streetlights" unique_id=1874399513 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight17" parent="Terrain/Streetlights" unique_id=1874399513 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.1000001, 0, 14)
 
-[node name="Streetlight18" parent="WorldViewport/Terrain/Streetlights" unique_id=2125599620 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight18" parent="Terrain/Streetlights" unique_id=2125599620 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.1, 0, 12)
 
-[node name="Streetlight19" parent="WorldViewport/Terrain/Streetlights" unique_id=1949256652 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight19" parent="Terrain/Streetlights" unique_id=1949256652 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.1, 0, 10)
 
-[node name="Streetlight20" parent="WorldViewport/Terrain/Streetlights" unique_id=98021558 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight20" parent="Terrain/Streetlights" unique_id=98021558 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.0999997, 0, 8)
 
-[node name="Streetlight21" parent="WorldViewport/Terrain/Streetlights" unique_id=1838382482 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight21" parent="Terrain/Streetlights" unique_id=1838382482 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.0999994, 0, 6)
 
-[node name="Streetlight22" parent="WorldViewport/Terrain/Streetlights" unique_id=68969283 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight22" parent="Terrain/Streetlights" unique_id=68969283 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.0999994, 0, 3.9999998)
 
-[node name="Streetlight23" parent="WorldViewport/Terrain/Streetlights" unique_id=229965066 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight23" parent="Terrain/Streetlights" unique_id=229965066 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.099999, 0, -2.3841858e-07)
 
-[node name="Streetlight" parent="WorldViewport/Terrain/Streetlights" unique_id=535944691 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight" parent="Terrain/Streetlights" unique_id=535944691 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 1)
 
-[node name="Streetlight2" parent="WorldViewport/Terrain/Streetlights" unique_id=1593266141 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight2" parent="Terrain/Streetlights" unique_id=1593266141 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 3)
 
-[node name="Streetlight3" parent="WorldViewport/Terrain/Streetlights" unique_id=1861250724 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight3" parent="Terrain/Streetlights" unique_id=1861250724 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 5)
 
-[node name="Streetlight4" parent="WorldViewport/Terrain/Streetlights" unique_id=1486705563 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight4" parent="Terrain/Streetlights" unique_id=1486705563 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 7)
 
-[node name="Streetlight5" parent="WorldViewport/Terrain/Streetlights" unique_id=2145302642 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight5" parent="Terrain/Streetlights" unique_id=2145302642 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 9)
 
-[node name="Streetlight6" parent="WorldViewport/Terrain/Streetlights" unique_id=716223904 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight6" parent="Terrain/Streetlights" unique_id=716223904 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 11)
 
-[node name="Streetlight7" parent="WorldViewport/Terrain/Streetlights" unique_id=1905079418 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight7" parent="Terrain/Streetlights" unique_id=1905079418 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 13)
 
-[node name="Streetlight8" parent="WorldViewport/Terrain/Streetlights" unique_id=1985469528 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight8" parent="Terrain/Streetlights" unique_id=1985469528 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 15)
 
-[node name="Streetlight9" parent="WorldViewport/Terrain/Streetlights" unique_id=1242568556 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight9" parent="Terrain/Streetlights" unique_id=1242568556 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 17)
 
-[node name="Streetlight10" parent="WorldViewport/Terrain/Streetlights" unique_id=1865927731 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight10" parent="Terrain/Streetlights" unique_id=1865927731 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 19)
 
-[node name="Streetlight11" parent="WorldViewport/Terrain/Streetlights" unique_id=1461915385 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight11" parent="Terrain/Streetlights" unique_id=1461915385 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 21)
 
-[node name="Streetlight12" parent="WorldViewport/Terrain/Streetlights" unique_id=776200895 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight12" parent="Terrain/Streetlights" unique_id=776200895 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 23)
 
-[node name="Streetlight26" parent="WorldViewport/Terrain/Streetlights" unique_id=1561140757 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight26" parent="Terrain/Streetlights" unique_id=1561140757 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 23)
 
-[node name="Streetlight27" parent="WorldViewport/Terrain/Streetlights" unique_id=391775880 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight27" parent="Terrain/Streetlights" unique_id=391775880 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 25)
 
-[node name="Streetlight28" parent="WorldViewport/Terrain/Streetlights" unique_id=2137601902 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight28" parent="Terrain/Streetlights" unique_id=2137601902 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 27)
 
-[node name="Streetlight35" parent="WorldViewport/Terrain/Streetlights" unique_id=1081927209 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight35" parent="Terrain/Streetlights" unique_id=1081927209 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1, 0, 28.5)
 
-[node name="Streetlight36" parent="WorldViewport/Terrain/Streetlights" unique_id=881831332 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight36" parent="Terrain/Streetlights" unique_id=881831332 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -3, 0, 28.5)
 
-[node name="Streetlight37" parent="WorldViewport/Terrain/Streetlights" unique_id=1067776938 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight37" parent="Terrain/Streetlights" unique_id=1067776938 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, 28.5)
 
-[node name="Streetlight38" parent="WorldViewport/Terrain/Streetlights" unique_id=320502834 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight38" parent="Terrain/Streetlights" unique_id=320502834 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7, 0, 28.5)
 
-[node name="Streetlight39" parent="WorldViewport/Terrain/Streetlights" unique_id=1285641307 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight39" parent="Terrain/Streetlights" unique_id=1285641307 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8.8, 0, 28.5)
 
-[node name="Streetlight40" parent="WorldViewport/Terrain/Streetlights" unique_id=1335845611 instance=ExtResource("7_sfkqm")]
+[node name="Streetlight40" parent="Terrain/Streetlights" unique_id=1335845611 instance=ExtResource("7_sfkqm")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -11, 0, 28.5)
 
-[node name="Walls" type="Node3D" parent="WorldViewport/Terrain" unique_id=86048813]
+[node name="Walls" type="Node3D" parent="Terrain" unique_id=86048813]
 
-[node name="Wall1" type="MeshInstance3D" parent="WorldViewport/Terrain/Walls" unique_id=663022110]
+[node name="Wall1" type="MeshInstance3D" parent="Terrain/Walls" unique_id=663022110]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 1.25, -1)
 mesh = SubResource("QuadMesh_23u71")
 surface_material_override/0 = SubResource("StandardMaterial3D_4gein")
 
-[node name="Wall2" type="MeshInstance3D" parent="WorldViewport/Terrain/Walls" unique_id=1065251797]
+[node name="Wall2" type="MeshInstance3D" parent="Terrain/Walls" unique_id=1065251797]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 11, 1.25, 5)
 mesh = SubResource("QuadMesh_sfkqm")
 surface_material_override/0 = SubResource("StandardMaterial3D_4gein")
 
-[node name="Wall3" type="MeshInstance3D" parent="WorldViewport/Terrain/Walls" unique_id=1811139230]
+[node name="Wall3" type="MeshInstance3D" parent="Terrain/Walls" unique_id=1811139230]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 23.2, 1.25, 11.2)
 mesh = SubResource("QuadMesh_wsokd")
 surface_material_override/0 = SubResource("StandardMaterial3D_4gein")
 
-[node name="CamViewport1" type="SubViewport" parent="." unique_id=769359292]
+[node name="SpawnZone" parent="Terrain" unique_id=199372426 instance=ExtResource("10_knc7f")]
+transform = Transform3D(-7.86805e-08, 0, -0.25, 0, 0.01, 0, 1.8, 0, -1.0927847e-08, 13.875216, 0.1, 2.013)
+
+[node name="ZoneCheckpoint" parent="Terrain" unique_id=1605115178 instance=ExtResource("11_3gvki")]
+transform = Transform3D(-7.86805e-08, 0, -0.25, 0, 0.01, 0, 1.8, 0, -1.0927847e-08, -0.92, 0.1, 2)
+
+[node name="ZoneRassemblement" parent="Terrain" unique_id=1647640770 node_paths=PackedStringArray("checkpoint_precedent") instance=ExtResource("12_knc7f")]
+transform = Transform3D(-2.644539e-08, 0, -0.605, 0, 0.01, 0, 0.605, 0, -2.644539e-08, 1.991, 0.1, 1.298)
+checkpoint_precedent = NodePath("../SpawnZone")
+probabilite = 0.25
+
+[node name="CamViewports" type="Node" parent="." unique_id=1211229553]
+
+[node name="CamViewport1" type="SubViewport" parent="CamViewports" unique_id=769359292]
 size = Vector2i(320, 240)
 
-[node name="Camera" type="Camera3D" parent="CamViewport1" unique_id=1454714244]
+[node name="Camera" type="Camera3D" parent="CamViewports/CamViewport1" unique_id=1454714244]
 transform = Transform3D(0.8660254, -0.1710101, 0.4698463, 0, 0.9396927, 0.34202018, -0.5, -0.2961982, 0.81379765, 0, 5, 0)
 current = true
 fov = 60.0
 far = 200.0
 script = ExtResource("1_vpklk")
-max_angle_right = 5.0
-max_angle_down = 60.0
+max_angle_left = 35.0
+max_angle_up = 20.0
+max_angle_down = 40.0
 
-[node name="OmniLight3D" type="OmniLight3D" parent="CamViewport1/Camera" unique_id=2098189554]
+[node name="OmniLight3D" type="OmniLight3D" parent="CamViewports/CamViewport1/Camera" unique_id=2098189554]
 light_color = Color(0.5418828, 0, 0, 1)
 light_energy = 0.464
 
-[node name="ShapeCast3D" type="ShapeCast3D" parent="CamViewport1/Camera" unique_id=52406834]
+[node name="ShapeCast3D" type="ShapeCast3D" parent="CamViewports/CamViewport1/Camera" unique_id=52406834]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("CylinderShape3D_23u71")
 target_position = Vector3(0, -50, 0)
 collision_mask = 2
 
-[node name="CamViewport2" type="SubViewport" parent="." unique_id=1802022806]
+[node name="CamViewport2" type="SubViewport" parent="CamViewports" unique_id=1802022806]
 size = Vector2i(320, 240)
 
-[node name="Camera" type="Camera3D" parent="CamViewport2" unique_id=2044907485]
+[node name="Camera" type="Camera3D" parent="CamViewports/CamViewport2" unique_id=2044907485]
 transform = Transform3D(-4.3711392e-08, -0.34202012, 0.9396926, 0, 0.9396926, 0.34202012, -1.0000001, 1.4950174e-08, -4.1075268e-08, 0.2600665, 4.999998, -98.514145)
 current = true
 fov = 60.0
@@ -422,22 +428,23 @@ far = 200.0
 script = ExtResource("1_vpklk")
 max_angle_left = 80.0
 max_angle_right = 80.0
-max_angle_down = 60.0
+max_angle_up = 20.0
+max_angle_down = 40.0
 
-[node name="OmniLight3D" type="OmniLight3D" parent="CamViewport2/Camera" unique_id=1610075093]
+[node name="OmniLight3D" type="OmniLight3D" parent="CamViewports/CamViewport2/Camera" unique_id=1610075093]
 light_color = Color(0.5418828, 0, 0, 1)
 light_energy = 0.464
 
-[node name="ShapeCast3D" type="ShapeCast3D" parent="CamViewport2/Camera" unique_id=2086184089]
+[node name="ShapeCast3D" type="ShapeCast3D" parent="CamViewports/CamViewport2/Camera" unique_id=2086184089]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("CylinderShape3D_23u71")
 target_position = Vector3(0, -50, 0)
 collision_mask = 2
 
-[node name="CamViewport3" type="SubViewport" parent="." unique_id=1724950183]
+[node name="CamViewport3" type="SubViewport" parent="CamViewports" unique_id=1724950183]
 size = Vector2i(320, 240)
 
-[node name="Camera" type="Camera3D" parent="CamViewport3" unique_id=1133043844]
+[node name="Camera" type="Camera3D" parent="CamViewports/CamViewport3" unique_id=1133043844]
 transform = Transform3D(1, 0, 0, 0, 0.9396927, 0.34202015, 0, -0.34202015, 0.9396927, 1.6184548, 5, -99.54791)
 current = true
 fov = 60.0
@@ -445,13 +452,14 @@ far = 200.0
 script = ExtResource("1_vpklk")
 max_angle_left = 80.0
 max_angle_right = 80.0
-max_angle_down = 60.0
+max_angle_up = 20.0
+max_angle_down = 40.0
 
-[node name="OmniLight3D" type="OmniLight3D" parent="CamViewport3/Camera" unique_id=838736216]
+[node name="OmniLight3D" type="OmniLight3D" parent="CamViewports/CamViewport3/Camera" unique_id=838736216]
 light_color = Color(0.5418828, 0, 0, 1)
 light_energy = 0.464
 
-[node name="ShapeCast3D" type="ShapeCast3D" parent="CamViewport3/Camera" unique_id=784555190]
+[node name="ShapeCast3D" type="ShapeCast3D" parent="CamViewports/CamViewport3/Camera" unique_id=784555190]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("CylinderShape3D_23u71")
 target_position = Vector3(0, -50, 0)

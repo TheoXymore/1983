@@ -3,7 +3,7 @@ class_name Rue
 
 var pool_passants:Pool = Pool.new()
 
-@export var scenes_passants:Array[PackedScene]
+@export var scenes_passants:Array[SpawnPassant]
 @export var taille_initiale = 100
 
 @export var spawn:ZoneSpawn
@@ -23,10 +23,6 @@ func _ready() -> void:
 	timer_spawn.timeout.connect(spawn_passant)
 	timer_spawn.start()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 	
 func construire_trajet()-> Array[Etape]:
 	var etapes:Array[Etape] = []

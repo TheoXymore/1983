@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://d1pyvsoumkn13"]
 
 [ext_resource type="Script" uid="uid://bycv075g1e53b" path="res://IA/passant_plotter.gd" id="1_1y3ps"]
-[ext_resource type="Texture2D" uid="uid://bd0a1t1ajrha0" path="res://assets/birdwatcher_in_a_khaki_vest_with_binoculars.png" id="2_rjb3f"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mipum"]
 size = Vector3(0.38506317, 0.74975586, 0.11138916)
@@ -16,5 +15,6 @@ shape = SubResource("BoxShape3D_mipum")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1645374132]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+pixel_size = 0.02
+billboard = 1
 texture_filter = 0
-texture = ExtResource("2_rjb3f")

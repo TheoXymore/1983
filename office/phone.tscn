@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dnsdn2tke00mn" path="res://office/phone.gd" id="1_ra8yq"]
 [ext_resource type="PackedScene" uid="uid://debnjvx8rwcwe" path="res://office/Office Phone by dook - YxfMuchpUF.glb" id="2_urlwp"]
+[ext_resource type="AudioStream" uid="uid://iepe18fqg7rq" path="res://assets/31 Ocarina 'Sun's Song'.mp3" id="3_urlwp"]
+[ext_resource type="Texture2D" uid="uid://b38sa2ppsjhxj" path="res://assets/phone.png" id="4_bjkow"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3b1fi"]
 size = Vector3(4.26828, 3.2314758, 1.8754883)
@@ -15,3 +17,12 @@ metadata/_custom_type_script = "uid://dnsdn2tke00mn"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=97156840]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5112152, 0.15879822, -0.4918369)
 shape = SubResource("BoxShape3D_3b1fi")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=727531298]
+stream = ExtResource("3_urlwp")
+
+[node name="Icon" type="Sprite3D" parent="." unique_id=1540210335]
+transform = Transform3D(8.318877, 0, 0, 0, 8.318877, 0, 0, 0, 1, -0.40888405, 4.109492, -0.3584528)
+billboard = 1
+texture_filter = 0
+texture = ExtResource("4_bjkow")

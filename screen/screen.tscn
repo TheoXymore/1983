@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b03y66qsgtbv6"]
 
-[ext_resource type="Script" uid="uid://cju7qk5m5om3w" path="res://screen/screen.gd" id="1_amvgh"]
+[ext_resource type="Script" uid="uid://yyy7yrkdw5l2" path="res://screen/screen.gd" id="1_amvgh"]
 [ext_resource type="PackedScene" uid="uid://bxac77jp6wya2" path="res://screen/Monitor by Poly by Google - 2D221SHzAER.glb" id="2_idr0c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mipum"]
@@ -26,7 +26,7 @@ transform = Transform3D(2.02, 0, 0, 0, 2.02, 0, 0, 0, 2.02, 0, 0, 0)
 shape = SubResource("BoxShape3D_mipum")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=702800752]
-transform = Transform3D(1.9814881, 0, 0, 0, 1.7559024, 0, 0, 0, 1, 0, 0.07324833, 0.9288665)
+transform = Transform3D(1.7548528, 0, 0, 0, 1.3802261, 0, 0, 0, 1.012, 0.020035982, 0.114212096, 0.9288665)
 layers = 2049
 mesh = SubResource("QuadMesh_mipum")
 

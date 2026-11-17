@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://xlsi1mb0lbh3"
 path.s3tc="res://.godot/imported/Computer mouse by Poly by Google - 6ikB7PIRVyd_ComputerMouse_BaseColor.png-36c28c8db96d5130e03607e37ad6ceeb.s3tc.ctex"
+path.etc2="res://.godot/imported/Computer mouse by Poly by Google - 6ikB7PIRVyd_ComputerMouse_BaseColor.png-36c28c8db96d5130e03607e37ad6ceeb.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://office/Computer mouse by Poly by Google - 6ikB7PIRVyd_ComputerMouse_BaseColor.png"
-dest_files=["res://.godot/imported/Computer mouse by Poly by Google - 6ikB7PIRVyd_ComputerMouse_BaseColor.png-36c28c8db96d5130e03607e37ad6ceeb.s3tc.ctex"]
+dest_files=["res://.godot/imported/Computer mouse by Poly by Google - 6ikB7PIRVyd_ComputerMouse_BaseColor.png-36c28c8db96d5130e03607e37ad6ceeb.s3tc.ctex", "res://.godot/imported/Computer mouse by Poly by Google - 6ikB7PIRVyd_ComputerMouse_BaseColor.png-36c28c8db96d5130e03607e37ad6ceeb.etc2.ctex"]
 
 [params]
 

@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b1jdesqd7y6lt"
 path.s3tc="res://.godot/imported/Keyboard by Poly by Google - 1U29qLrhNs3_Commodore 64 Texture.png-5e693c227577550803e52b621f3a553c.s3tc.ctex"
+path.etc2="res://.godot/imported/Keyboard by Poly by Google - 1U29qLrhNs3_Commodore 64 Texture.png-5e693c227577550803e52b621f3a553c.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://office/Keyboard by Poly by Google - 1U29qLrhNs3_Commodore 64 Texture.png"
-dest_files=["res://.godot/imported/Keyboard by Poly by Google - 1U29qLrhNs3_Commodore 64 Texture.png-5e693c227577550803e52b621f3a553c.s3tc.ctex"]
+dest_files=["res://.godot/imported/Keyboard by Poly by Google - 1U29qLrhNs3_Commodore 64 Texture.png-5e693c227577550803e52b621f3a553c.s3tc.ctex", "res://.godot/imported/Keyboard by Poly by Google - 1U29qLrhNs3_Commodore 64 Texture.png-5e693c227577550803e52b621f3a553c.etc2.ctex"]
 
 [params]
 

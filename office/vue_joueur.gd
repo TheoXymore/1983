@@ -48,6 +48,7 @@ func select_screen_under_crosshair():
 		current_object.try_to_answer()
 
 func move_camera_to_global_position(position, rotation, can_move):
+	$ColorRect.visible = can_move
 	if tween and tween.is_valid():
 		tween.kill()
 	tween = create_tween()

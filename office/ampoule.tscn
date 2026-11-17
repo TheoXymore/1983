@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://7xls1kmx4hf8"]
+
+[ext_resource type="Script" uid="uid://bujhop6rfomna" path="res://office/lightBulb.gd" id="1_m6yte"]
+[ext_resource type="PackedScene" uid="uid://gu3oyf5we2gf" path="res://office/Light bulb by reelpersen - kDo0SbQW9Y.glb" id="2_seu8j"]
+[ext_resource type="Script" uid="uid://clipaj07b26s" path="res://office/flickerign_light.gd" id="3_seu8j"]
+
+[node name="Ampoule" type="Node3D" unique_id=633780934]
+script = ExtResource("1_m6yte")
+
+[node name="Root Scene" parent="." unique_id=362030935 instance=ExtResource("2_seu8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.899112, 0)
+
+[node name="Lumiere_Plafond" type="SpotLight3D" parent="." unique_id=964204330]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -8.740163, 0.06432277)
+light_color = Color(1, 1, 0.61960787, 1)
+light_cull_mask = 4294967293
+shadow_enabled = true
+script = ExtResource("3_seu8j")
+
+[node name="Timer" type="Timer" parent="." unique_id=2042706258]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -4,11 +4,11 @@
 [ext_resource type="Script" uid="uid://cnxwe5r6tahp5" path="res://office/vue_joueur.gd" id="1_yy8ch"]
 [ext_resource type="PackedScene" uid="uid://b03y66qsgtbv6" path="res://screen/screen.tscn" id="2_3hqai"]
 [ext_resource type="PackedScene" uid="uid://wq1u4e0gv8uc" path="res://street/street.tscn" id="2_5j1s6"]
+[ext_resource type="PackedScene" uid="uid://7xls1kmx4hf8" path="res://office/ampoule.tscn" id="3_ail1s"]
 [ext_resource type="PackedScene" uid="uid://cv7weysihmh6d" path="res://office/Desk by Quaternius - V86Go2rlnq.glb" id="3_i6g08"]
 [ext_resource type="Texture2D" uid="uid://bto7ppj7i7t8s" path="res://office/bamboo_seamless_1k_c.png" id="4_fpao1"]
 [ext_resource type="PackedScene" uid="uid://cdtjlw06suixb" path="res://office/Computer mouse by Poly by Google - 6ikB7PIRVyd.glb" id="4_tcoip"]
 [ext_resource type="Texture2D" uid="uid://rq7pf12kq8hc" path="res://office/trak2_wall1b.tga" id="5_2ecji"]
-[ext_resource type="PackedScene" uid="uid://gu3oyf5we2gf" path="res://office/Light bulb by reelpersen - kDo0SbQW9Y.glb" id="6_f36xe"]
 [ext_resource type="PackedScene" uid="uid://cfdvbof3s3jaf" path="res://office/Keyboard by Poly by Google - 1U29qLrhNs3.glb" id="7_y31d6"]
 [ext_resource type="PackedScene" uid="uid://w0ix0gv1f7ac" path="res://office/Chair by Poly by Google - 49lEx3gLfn9.glb" id="8_vqm4e"]
 [ext_resource type="PackedScene" uid="uid://bgittxxt76yij" path="res://office/Night Stand by Quaternius - 9LI73c5uFA.glb" id="10_vac0n"]
@@ -68,8 +68,12 @@ rue = ExtResource("2_5j1s6")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1618774863]
 environment = SubResource("Environment_8pg2w")
 
+[node name="Ampoule" parent="." unique_id=633780934 instance=ExtResource("3_ail1s")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 3.2890713, -0.9618329)
+
 [node name="Lumiere_Plafond" type="SpotLight3D" parent="." unique_id=1880976669]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.7739465, -0.9984643)
+visible = false
 light_color = Color(1, 1, 0.61960787, 1)
 light_cull_mask = 4294967293
 shadow_enabled = true
@@ -80,6 +84,21 @@ script = ExtResource("1_yy8ch")
 
 [node name="RayCast3D" type="RayCast3D" parent="Vue_Joueur" unique_id=1007433458]
 transform = Transform3D(1, 0, 0, 0, -1.3113416e-07, -1, 0, 3, -4.371139e-08, 0, 0, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Vue_Joueur" unique_id=593370183]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.49411765)
 
 [node name="Sol" type="Node3D" parent="." unique_id=1660880146]
 transform = Transform3D(3.5, 0, 0, 0, 0.233, 0, 0, 0, 3.5, 0, 0, -1)
@@ -197,9 +216,6 @@ transform = Transform3D(-6.5567085e-09, 0, 0.15, 0, 0.15, 0, -0.15, 0, -6.556708
 [node name="Night_Stand" parent="." unique_id=1240037349 instance=ExtResource("10_vac0n")]
 transform = Transform3D(-9.76288e-08, 0, -0.90999997, 0, 0.90999997, 0, 0.90999997, 0, -9.76288e-08, 1.1713141, 0.17773831, -0.10678288)
 
-[node name="Light_Bulb" parent="." unique_id=1777320494 instance=ExtResource("6_f36xe")]
-transform = Transform3D(0.07699998, 0, 0, 0, 0.046599984, 0, 0, 0, 0.07699998, 0, 2.7787976, -0.991717)
-
 [node name="Door" parent="." unique_id=788658171 instance=ExtResource("14_f36xe")]
 transform = Transform3D(-3.934025e-08, 0, 0.9, 0, 0.9, 0, -0.9, 0, -3.934025e-08, -1.5117915, 0.07559198, -0.34522367)
 
@@ -229,3 +245,5 @@ horizontal_alignment = 1
 [node name="TextLabel" type="Label" parent="DialogueBox/Panel/VBoxContainer" unique_id=609237873]
 layout_mode = 2
 horizontal_alignment = 1
+
+[editable path="Ampoule"]
